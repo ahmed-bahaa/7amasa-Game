@@ -13,7 +13,7 @@ var character = document.getElementById("man");
 var main_win = document.getElementById("main_window");
 
 // images
-var character_run = ["im.png","im2.png","enemy.gif"];
+var character_run = ["im.png","im2.png"];
 var background_images = ["url(back.jpg)","url(back2.jpg)"];
 let i=0;    //character positions
 let j=0;    //background swapper 
@@ -48,7 +48,6 @@ function move(event){
 function right( ){
     console.log("ya lahwaaaay");
     let w = main_win.offsetWidth - character.offsetWidth;
-    let h = main_win.innerHeight - character.offsetHeight;
     
     console.log(w);
     if ( w <= pos1 )
@@ -57,14 +56,14 @@ function right( ){
         pos1=0;
         character.style.left=pos1 +"px";
         console.log(background_images[j]);
-        main_win.style.backgroundImage=background_images[j];
         j=(++j)%background_images.length;
+        main_win.style.backgroundImage=background_images[j];
     }
     else{
         //console.log(character_run[i]);
         character.src = character_run[i];
         i=(++i)%character_run.length;
-        pos1 += 25;
+        pos1 += 20;
         character.style.left = pos1 + "px";
     }
 
@@ -75,7 +74,6 @@ function right( ){
 function left( ){
     console.log("ya 5taaaaayy");
     let w = main_win.offsetWidth - character.offsetWidth;
-    let h = main_win.innerHeight - character.offsetHeight;
     console.log(w);
     if (pos1 <=0 )
     {
@@ -83,14 +81,15 @@ function left( ){
         pos1=w;
         character.style.left=pos1 +"px";
         console.log(background_images[j]);
-        main_win.style.backgroundImage=background_images[j];
         j=(++j)%background_images.length;
+        main_win.style.backgroundImage=background_images[j];
+        
         
     }
     else{
         character.src = character_run[i];
         i=(++i)%character_run.length;
-        pos1 -= 25;
+        pos1 -= 20;
         character.style.left = pos1 + "px";
     }
 
@@ -102,27 +101,28 @@ function left( ){
 
 function jump(event){
 
-    let h = main_win.innerHeight - character.offsetHeight;
-    
-    console.log(character.offsetHeight);
     console.log("ya sal7daaaaar nazl el sabbbt");
-    console.log(h);
     console.log(original);
-    pos2=40;
-    character.style.bottom=pos2 +"%"; 
-    gravity = setInterval(land,25);
- 
-    
-    /*
-    else{
-        character.src = character_run[i];
-        i=(++i)%character_run.length;
-        pos1 -= 25;
-        character.style.left = pos1 + "px";
-    }
-    */
+    pos2=original;
+    jumpFlag=1;
+    gravity = setInterval(raise,21);
     
 }
+
+
+function raise()
+{
+    console.log("ana taleeeeee3");
+    if( pos2 < original+jump_power )   
+    {   pos2+=1;
+        character.style.bottom=pos2+ "%"; 
+    }   
+    else{
+        clearInterval(gravity);
+        gravity = setInterval(land,21);
+    }
+}
+
 
 function land()
 {
@@ -134,6 +134,7 @@ function land()
     else{
         character.style.bottom=original+"%"; 
         clearInterval(gravity);
+        jumpFlag=0;
     }
 }
 
