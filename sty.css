@@ -32,3 +32,11 @@ body,html{
     height: 20%;
     bottom: 13%;
 }
+
+.coin {
+    position: absolute;
+    width: 6%;
+    height: 6%;
+    bottom: 20%;
+    left: 100px; 
+}
