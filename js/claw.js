@@ -134,4 +134,60 @@ function land()
         jumpFlag=0;
     }
 }
+/============================================================ Mo3tasem /
+
+var lastLoopRun = 0;
+
+function setPosition(charchter) {
+    character.style.top = charchter.y+"px";
+}
+
+
+var lp= function loop(bullet) {
+    if (counter<300) {
+        return false;
+    }
+
+    setTimeout(lp(bullet), 2);
+}
+var arrOfEnemies = [];
+function shoot() {
+    var counter=character.offsetLeft+50;
+    var bullet = document.createElement("img");
+    bullet.className = "bullet";
+    main_win.appendChild(bullet);
+    bullet.style.top = (character.offsetTop+ 40)+"px";
+    bullet.style.left = (character.offsetLeft+95) + "px";
+    function move(){
+
+        var enemy = document.getElementById("enemy");
+        if (!(counter >= enemy.offsetLeft) )
+        {
+            bullet.style.left = (counter++)+"px";
+        }
+        else if (counter >= enemy.offsetLeft && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight))
+        {
+            bullet.parentNode.removeChild(bullet);
+            enemy.parentNode.removeChild(enemy);
+            setTimeout(clearInterval(interval), 1);
+        }
+        else
+        {
+            bullet.parentNode.removeChild(bullet);
+            setTimeout(clearInterval(interval), 1);
+        }
+    }
+    var interval = setInterval(move,1);
+}
+document.onkeydown = function (e) {
+
+    if( e.keyCode === 32)
+    {
+        shoot();
+        e.preventDefault();
+    }
+}
+
+
+
 
