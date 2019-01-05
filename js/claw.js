@@ -12,13 +12,12 @@ var character = document.getElementById("man");
 var main_win = document.getElementById("main_window");
 
 // images
-var character_run = ["im.png","im2.png"];
-var background_images = ["url(back.jpg)","url(back2.jpg)"];
+var character_run = ["images/im.png","images/im2.png"];
+var background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
 let i=0;    //character positions
 let j=0;    //background swapper 
 
 document.addEventListener( 'keydown', move );
-
 
 //functions
 

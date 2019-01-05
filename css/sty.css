@@ -1,0 +1,76 @@
+
+body,html{
+    height: 100%;
+}
+
+
+#main_window{
+    background-image: url(../images/back.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: inherit;
+    position: relative;
+    background-size: cover;
+}
+
+
+/*
+#background{
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+*/
+
+
+#man{
+   
+    position: absolute;
+    width: 10%;
+    height: 20%;
+    bottom: 13%;
+}
+
+.coin {
+    position: absolute;
+    width: 6%;
+    height: 6%;
+    bottom: 20%;
+    left: 100px; 
+}
+
+#profile_background {
+    background-image: url(../images/profile_background.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: inherit;
+    position: relative;
+    background-size: cover;
+}
+
+#lives {
+    margin-left: 10vw;
+    width: 20vw;
+    height: 25vw;
+    background-color: white;
+    opacity: .8;
+    text-align: center;
+    color: red;
+}
+
+#livesImage {
+    position: relative;
+    width: 10vw;
+    height: 10vw;
+}
+
+
+#score {
+    margin-left: 10vw;
+    width: 20vw;
+    height: 20vw;
+    background-color: white;
+    opacity: .8;
+}
