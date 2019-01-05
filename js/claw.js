@@ -1,4 +1,3 @@
-
 //positions 
 let pos1=0;
 let pos2=0;
@@ -68,7 +67,6 @@ function right( ){
     }
 
 }
-
 
 
 function left( ){
