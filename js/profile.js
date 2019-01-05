@@ -4,7 +4,7 @@ let livesCount = storage['lives'];
 
 let score = storage['score'];
 
-let levels = storage['level'];
+let levels = storage['level']; 
 
 let charId = storage['characterId'];
 

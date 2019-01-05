@@ -4,6 +4,7 @@ let pos2=0;
 let original = 13;
 var jumpFlag=0;
 var gravity=0;
+
 //character attributes
 jump_power=25;
 
@@ -20,7 +21,6 @@ let j=0;    //background swapper
 document.addEventListener( 'keydown', move );
 
 //functions
-
 function move(event){
     
     console.log(event.type);
