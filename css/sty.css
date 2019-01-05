@@ -74,3 +74,23 @@ body,html{
     background-color: white;
     opacity: .8;
 }
+
+
+
+/*========================= Mo3tasem */
+
+.bullet{
+    width: 15px;
+    height: 5px;
+    background-color: blueviolet;
+    position: relative;
+
+}
+#enemy{
+    width: 30px;
+    height: 80px;
+    position: absolute;
+    background-color: crimson;
+    top: 280px;
+    left: 1220px;
+}
