@@ -33,6 +33,14 @@ body,html{
     bottom: 13%;
 }
 
+.ene{
+    position: absolute;
+    width: 10%;
+    height: 20%;
+    bottom: 13%;
+    display: none;
+}
+
 .coin {
     position: absolute;
     width: 6%;

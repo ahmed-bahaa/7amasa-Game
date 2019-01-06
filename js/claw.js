@@ -1,26 +1,60 @@
-//positions 
+//character positions 
 let pos1=0;
 let pos2=0;
+let bull1=0;
 let original = 13;
-var jumpFlag=0;
-var gravity=0;
+let jumpFlag=0;
+let gravity=0;
+let health=100;
+let score=0;
 
 //character attributes
-jump_power=25;
+jump_power=35;
 
 //get elements
-var character = document.getElementById("man");
-var main_win = document.getElementById("main_window");
+let character = document.getElementById("man");
+let main_win = document.getElementById("main_window");
 
 // images
-var character_run = ["images/im.png","images/im2.png"];
-var background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
+let character_run = ["images/im.png","images/im2.png"];
+let background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
 let i=0;    //character positions
 let j=0;    //background swapper 
 
 document.addEventListener( 'keydown', move );
 
+
+//enemies 
+
+let enemy_health = [];
+let num_enemies;
+let enemy_arr;
+
+function draw_enemy(){
+    enemy_arr=document.getElementsByClassName("ene");
+    let rand_ene=Math.floor((Math.random() * 2) + 1);
+    num_enemies=rand_ene;
+
+    let rand_pos=Math.floor((Math.random() * 20) + 5);
+    enemy_arr[0].style.right=rand_pos+"%";
+    rand_pos=Math.floor((Math.random() * 25) + 27);
+    enemy_arr[1].style.right=rand_pos+"%";
+
+    if( rand_ene ===1 ){
+        enemy_arr[0].style.display="block";
+        enemy_health[0] = 100;
+    }
+    else{
+        enemy_arr[0].style.display="block";
+        enemy_arr[1].style.display="block";
+        enemy_health[0]=100;
+        enemy_health[1]=100;
+    }
+}
+
+
 //functions
+
 function move(event){
     
     //console.log(event.type);
@@ -56,6 +90,7 @@ function right( ){
         console.log(background_images[j]);
         j=(++j)%background_images.length;
         main_win.style.backgroundImage=background_images[j];
+        draw_enemy();   
     }
     else{
         //console.log(character_run[i]);
@@ -63,6 +98,7 @@ function right( ){
         i=(++i)%character_run.length;
         pos1 += 20;
         character.style.left = pos1 + "px";
+        
     }
 
 }
@@ -74,14 +110,15 @@ function left( ){
   //  console.log(w);
     if (pos1 <=0 )
     {
-      //  console.log("ana wasalet");
-        pos1=w;
-        character.style.left=pos1 +"px";
-      //  console.log(background_images[j]);
-        j=(++j)%background_images.length;
-        main_win.style.backgroundImage=background_images[j];
+        //console.log("ana wasalet");
+        //pos1=w;
+        //character.style.left=pos1 +"px";
+        //console.log(background_images[j]);
+        //j=(++j)%background_images.length;
+        //main_win.style.backgroundImage=background_images[j];
         
-        
+        character.src = character_run[i];
+        i=(++i)%character_run.length;
     }
     else{
         character.src = character_run[i];
@@ -91,7 +128,6 @@ function left( ){
     }
 
 }
-
 
 
 
@@ -134,6 +170,46 @@ function land()
         jumpFlag=0;
     }
 }
+
+
+
+
+/*
+
+// scenario 1: 
+max=2                                            [[done]]
+image-enemy                                      [[done]]
+display-none                                     [[done]]
+rebuild with background                          [[done]]
+position-y=13                                    [[done]]  
+position-x=random                                [[done]]
+health                                           [[done]]
+rebuild with background health                   [[done]]
+// fix if there is no enemies                    [[done]]
+collision                                        [[done]]
+
+======================
+shoot-interval (enemy shoot)
+hit-> character-health --
+
+// reduce health for enemies
+// collision between character and enemy 
+// levels 
+// characters (images)
+// background (images)
+
+
+*/
+
+
+
+
+
+draw_enemy();   
+
+
+
+
 /============================================================ Mo3tasem /
 
 var lastLoopRun = 0;
@@ -158,26 +234,53 @@ function shoot() {
     main_win.appendChild(bullet);
     bullet.style.top = (character.offsetTop+ 40)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
-    function move(){
+    function move_bullet(){
+        
+        for( var i=0 ; i<num_enemies ; i++){
 
-        var enemy = document.getElementById("enemy");
-        if (!(counter >= enemy.offsetLeft) )
-        {
-            bullet.style.left = (counter++)+"px";
+            var enemy = enemy_arr;
+            if (!(counter >= enemy[i].offsetLeft) )
+            {
+                bullet.style.left = (counter++)+"px";
+            }
+            else if (counter >= enemy[i].offsetLeft && bullet.offsetTop > enemy[i].offsetTop && bullet.offsetTop < (enemy[i].offsetTop+enemy[i].offsetHeight))
+            {
+                bullet.parentNode.removeChild(bullet);
+                enemy[i].style.display="none";
+                //reduce health
+                num_enemies--;
+
+                setTimeout(clearInterval(interval), 1);
+            }
+            else
+            {
+                bullet.parentNode.removeChild(bullet);
+                setTimeout(clearInterval(interval), 1);
+            }
+            
         }
-        else if (counter >= enemy.offsetLeft && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight))
-        {
-            bullet.parentNode.removeChild(bullet);
-            enemy.parentNode.removeChild(enemy);
-            setTimeout(clearInterval(interval), 1);
-        }
-        else
-        {
-            bullet.parentNode.removeChild(bullet);
-            setTimeout(clearInterval(interval), 1);
+        if(num_enemies==0){
+            
+            
+
+            let w = main_win.offsetWidth - bullet.offsetWidth;
+    
+            //  console.log(w);
+                if ( w <= counter )
+                {
+                    bullet.parentNode.removeChild(bullet);
+                    clearInterval(interval);
+                }
+                else{
+                    //console.log(character_run[i]);
+                    
+                    bull1 += 20;
+                    bullet.style.left = (counter++)+"px";
+                    
+                }
         }
     }
-    var interval = setInterval(move,1);
+    var interval = setInterval(move_bullet,1);
 }
 document.onkeydown = function (e) {
 
