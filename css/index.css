@@ -1,0 +1,54 @@
+.body{
+    background-color: bisque;
+}
+.char1{
+    
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    width:24%;
+}
+.char2{
+    
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    width:23%;
+}
+.ship{
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 38%;
+}
+.btns
+{
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    width: 50%;
+    height: 90%;
+
+}
+.play , .opt , .profile , .map{
+    position: absolute;
+    background-color:black;
+    width: 6em;
+    height: 3em;
+    border-radius: 2em;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+}
+.opt{
+    top: 4em;
+}
+.profile
+{
+    top: 8em;
+}
+.map{
+    top: 12em;
+    /*left: 5.25em;*/
+}

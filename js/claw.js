@@ -23,10 +23,10 @@ document.addEventListener( 'keydown', move );
 //functions
 function move(event){
     
-    console.log(event.type);
+    //console.log(event.type);
     if(event.which === 39 )
     {
-        console.log("hello");
+    //    console.log("hello");
     right();  
     }
 
@@ -44,10 +44,10 @@ function move(event){
 
 
 function right( ){
-    console.log("ya lahwaaaay");
+  //  console.log("ya lahwaaaay");
     let w = main_win.offsetWidth - character.offsetWidth;
     
-    console.log(w);
+  //  console.log(w);
     if ( w <= pos1 )
     {
         console.log("ana wasalet");
@@ -69,15 +69,15 @@ function right( ){
 
 
 function left( ){
-    console.log("ya 5taaaaayy");
+  //  console.log("ya 5taaaaayy");
     let w = main_win.offsetWidth - character.offsetWidth;
-    console.log(w);
+  //  console.log(w);
     if (pos1 <=0 )
     {
-        console.log("ana wasalet");
+      //  console.log("ana wasalet");
         pos1=w;
         character.style.left=pos1 +"px";
-        console.log(background_images[j]);
+      //  console.log(background_images[j]);
         j=(++j)%background_images.length;
         main_win.style.backgroundImage=background_images[j];
         
@@ -98,8 +98,8 @@ function left( ){
 
 function jump(event){
 
-    console.log("ya sal7daaaaar nazl el sabbbt");
-    console.log(original);
+   // console.log("ya sal7daaaaar nazl el sabbbt");
+   // console.log(original);
     pos2=original;
     jumpFlag=1;
     gravity = setInterval(raise,21);
@@ -109,7 +109,7 @@ function jump(event){
 
 function raise()
 {
-    console.log("ana taleeeeee3");
+   // console.log("ana taleeeeee3");
     if( pos2 < original+jump_power )   
     {   pos2+=1;
         character.style.bottom=pos2+ "%"; 
@@ -123,7 +123,7 @@ function raise()
 
 function land()
 {
-    console.log("ana nazeeeeeeeeeeel");
+   // console.log("ana nazeeeeeeeeeeel");
     if( pos2 > original )   
     {   pos2-=1;
         character.style.bottom=pos2+ "%"; 

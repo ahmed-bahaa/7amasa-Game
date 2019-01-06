@@ -1,0 +1,100 @@
+body {
+    background-image: url("39587114-library-wallpapers.jpg");
+    background-size: cover;
+}
+
+.navigation_bar {
+    background-color: black;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.navigation_bar li {
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+    margin-right: 60px;
+    margin-left: 60px;
+    display: inline-block;
+}
+
+a:hover {
+    color: darkseagreen;
+}
+
+a:visited {
+    color: cornflowerblue;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    padding: auto;
+    width: 100px;
+}
+
+.dropdown_content a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.dropdown:hover .dropdown_content {
+    display: block;
+}
+
+.submit {
+    background-color: crimson;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 40px;
+    text-align: center;
+    color: white;
+}
+
+.credential_menu {
+    background-color: black;
+    color: white;
+    width: 300px;
+    height: 400px;
+    padding: 5px 70px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    box-sizing: border-box;
+}
+
+.credential_menu form input {
+    margin-bottom: 30px;
+}
+
+.credential_menu form a {
+    margin-top: 30px;
+    font-size: small;
+}
+
+.image_block{
+    background-color: black;
+    color: white;
+    width: 400px;
+    height: 300px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 200px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.image_block li{
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.image_block li img{
+    width: 150px;
+}
+
