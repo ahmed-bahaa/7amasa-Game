@@ -24,6 +24,43 @@ body,html{
 }
 */
 
+#scoreDisplay{
+    position: absolute;
+    top: 5%;
+    left: 2%;
+    width: 17%;
+    height: 15%;
+    z-index: 2;
+    background-color: seagreen;
+    border-radius: 0.5em;
+    font-size: 17px;
+    padding-left: 15px;
+    padding-top: 7px;
+    color: beige;
+}
+
+/*
+#left , #right{
+
+    display: inline;
+    padding: 1px;
+
+}
+*/
+.scoreFld , .coinsFld{
+    display: inline;
+    padding-right:3em;
+}
+
+.lvlFld , .weaponFld {
+    display: inline;
+    padding-right:3.3em;
+}
+
+.healthFld , .noLivesFld{
+    display: inline;
+    padding-right:2em;
+}
 
 #man{
    
@@ -43,7 +80,7 @@ body,html{
 
 .coin {
     position: absolute;
-    width: 6%;
+    width: 3%;
     height: 6%;
     bottom: 20%;
     left: 100px; 
