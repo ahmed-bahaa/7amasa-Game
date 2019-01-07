@@ -1,4 +1,29 @@
-img{
-    width: 99.5%;
-    position: relative;
+#levelMap{
+    width: 97.5%;
+    position: absolute;
+}
+#unlock1 , #unlock2 , #unlock3
+{
+    position: absolute;
+}
+
+#unlock1
+{
+    width: 5%;
+    top: 8em;
+    right: 13em;
+}
+
+#unlock2
+{
+    width: 4%;
+    top: 28em;
+    right: 27em;
+}
+
+#unlock3
+{
+    width: 4%;
+    top: 19em;
+    right: 36em;
 }
