@@ -31,7 +31,7 @@ let num_enemies;
 let enemy_arr;
 
 
-//============================================================ Nada /
+//==========================coins================================== Nada /
 let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
 function generateCoins(start, noOfCoins){
@@ -109,7 +109,7 @@ function right( ){
         j=(++j)%background_images.length;
         main_win.style.backgroundImage=background_images[j];
         draw_enemy(); 
-        generateCoins(100, 3);  
+        generateCoins(100, 3);
     }
     else{
         //console.log(character_run[i]);
@@ -310,8 +310,8 @@ document.onkeydown = function (e) {
 }
 
 
-//============================================================ Nada /
-coins = document.getElementsByClassName('coin');
+//=============================coins=============================== Nada /
+let coins = document.getElementsByClassName('coin');
 
 function collect (event){
     for (let i=0; i<coins.length; i++){
@@ -325,4 +325,20 @@ function collect (event){
 }
 document.addEventListener('keydown',collect);
 
+//============================================================ EON :v /
+
+
+
+//=============================real time value from localstorage=============================== Nada /
+let levelField = document.getElementsByClassName("lvlFld")[0];
+let coinsField = document.getElementsByClassName("coinsFld")[0];
+let livesField = document.getElementsByClassName("noLivesFld")[0];
+
+let levelNumber = storage['level'];
+let coinsNumber = storage['score'];
+let livesNumber = storage['lives'];
+
+levelField.textContent= "LVL.:"+levelNumber;
+coinsField.textContent= "Coins:"+coinsNumber;
+livesField.textContent= "no.lives:x"+livesNumber;
 //============================================================ EON :v /
