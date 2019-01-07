@@ -30,6 +30,24 @@ let enemy_health = [];
 let num_enemies;
 let enemy_arr;
 
+
+//============================================================ Nada /
+let storage = JSON.parse(localStorage.getItem('gameStorage'));
+
+function generateCoins(start, noOfCoins){
+    let space=start;
+    for (let i=0; i<noOfCoins; i++){
+        let coin= document.createElement("img");
+        coin.src="images/coin.png";
+        coin.classList.add("coin");
+        coin.style.left= space+'px';    
+        main_win.appendChild(coin);
+        space += 200;
+    }
+}
+generateCoins(100,4);
+//============================================================ EON :v /
+
 function draw_enemy(){
     enemy_arr=document.getElementsByClassName("ene");
     let rand_ene=Math.floor((Math.random() * 2) + 1);
@@ -90,7 +108,8 @@ function right( ){
         console.log(background_images[j]);
         j=(++j)%background_images.length;
         main_win.style.backgroundImage=background_images[j];
-        draw_enemy();   
+        draw_enemy(); 
+        generateCoins(100, 3);  
     }
     else{
         //console.log(character_run[i]);
@@ -98,7 +117,6 @@ function right( ){
         i=(++i)%character_run.length;
         pos1 += 20;
         character.style.left = pos1 + "px";
-        
     }
 
 }
@@ -292,5 +310,19 @@ document.onkeydown = function (e) {
 }
 
 
+//============================================================ Nada /
+coins = document.getElementsByClassName('coin');
 
+function collect (event){
+    for (let i=0; i<coins.length; i++){
+        if (character.getBoundingClientRect().left == coins[i].getBoundingClientRect().left){
+            coins[i].style.visibility="hidden";
+            coins[i].parentNode.removeChild(coins[i]);
+            storage['score'] +=1;
+            localStorage.setItem('gameStorage', JSON.stringify(storage));
+        }
+    }
+}
+document.addEventListener('keydown',collect);
 
+//============================================================ EON :v /
