@@ -1,15 +1,22 @@
-//stored items array
+let storage = JSON.parse(localStorage.getItem('gameStorage'));
+let level = storage['level'];
 
-localStorage.setItem('gameStorage', 
-JSON.stringify(gameStorage));
+for ( i=3; i>=level; i--)
+{
+    if(i>=level)
+    {
+        document.getElementById("unlock"+i).style.display ="none";
+
+    }
+}
 
 function checkLevel(id)
 {
-    let storage = JSON.parse(localStorage.getItem('gameStorage'));
-    let level = storage['level'];
+
     if (id<=level)
     {
-        window.open('level.html','_blank');
+        window.open('level_1.html','_blank');
+
     }
     else
     {

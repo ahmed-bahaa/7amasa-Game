@@ -33,7 +33,7 @@ let enemy_arr;
 let enemy_interval=[];
 
 
-//============================================================ Nada /
+//==========================coins================================== Nada /
 let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
 function generateCoins(start, noOfCoins){
@@ -118,7 +118,7 @@ function right( ){
         j=(++j)%background_images.length;
         main_win.style.backgroundImage=background_images[j];
         draw_enemy(); 
-        generateCoins(100, 3);  
+        generateCoins(100, 3);
     }
     else{
         //console.log(character_run[i]);
@@ -219,12 +219,12 @@ collision                                        [[done]]
 hit-> character-health --                        [[done]]
 // reduce health for enemies                     [[done]]
 shoot-interval (enemy shoot)                     [[done]]
-======================
+collision between character and enemy            [[done]] 
+=====================
 
 
-//hero's lives
+// hero's lives
 // show score                                   <-- nouran
-// collision between character and enemy        << me 
 // characters (images)
 // background (images)
 
@@ -241,7 +241,7 @@ draw_enemy();
 
 
 
-/============================================================ Mo3tasem /
+//============================================================ Mo3tasem /
 
 var lastLoopRun = 0;
 
@@ -383,6 +383,8 @@ function shoot_enemy( k) {
                         {
                             alert("game over");
                             health=100;
+                            storage['lives'] -=1;
+                            localStorage.setItem('gameStorage', JSON.stringify(storage));
                         }
 
                     }
@@ -427,7 +429,7 @@ function shoot_enemy( k) {
 
     
 //============================================================ Nada /
-coins = document.getElementsByClassName('coin');
+let coins = document.getElementsByClassName('coin');
 
 function collect (event){
     for (let i=0; i<coins.length; i++){
@@ -462,3 +464,16 @@ function coll() {
     
 
 }
+//=============================real time value from localstorage=============================== Nada /
+let levelField = document.getElementsByClassName("lvlFld")[0];
+let coinsField = document.getElementsByClassName("coinsFld")[0];
+let livesField = document.getElementsByClassName("noLivesFld")[0];
+
+let levelNumber = storage['level'];
+let coinsNumber = storage['score'];
+let livesNumber = storage['lives'];
+
+levelField.textContent= "LVL.:"+levelNumber;
+coinsField.textContent= "Coins:"+coinsNumber;
+livesField.textContent= "no.lives:x"+livesNumber;
+//============================================================ EON :v /
