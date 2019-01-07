@@ -65,6 +65,7 @@ body,html{
 #man{
    
     position: absolute;
+    padding: 0px;
     width: 10%;
     height: 20%;
     bottom: 13%;
@@ -72,6 +73,7 @@ body,html{
 
 .ene{
     position: absolute;
+    padding: 0px;
     width: 10%;
     height: 20%;
     bottom: 13%;

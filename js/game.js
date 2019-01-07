@@ -8,6 +8,7 @@ let gravity=0;
 let health=100;
 let score=0;
 let bullet_damage=50;
+
 //character attributes
 jump_power=35;
 
@@ -125,6 +126,7 @@ function right( ){
         i=(++i)%character_run.length;
         pos1 += 20;
         character.style.left = pos1 + "px";
+        coll();
     }
 
 }
@@ -151,6 +153,7 @@ function left( ){
         i=(++i)%character_run.length;
         pos1 -= 20;
         character.style.left = pos1 + "px";
+        coll();
     }
 
 }
@@ -220,8 +223,8 @@ shoot-interval (enemy shoot)                     [[done]]
 
 
 //hero's lives
-// show score 
-// collision between character and enemy 
+// show score                                   <-- nouran
+// collision between character and enemy        << me 
 // characters (images)
 // background (images)
 
@@ -263,18 +266,37 @@ function shoot() {
     main_win.appendChild(bullet);
     bullet.style.top = (character.offsetTop+ 40)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
+
     function move_bullet(){
-        
+
+    if(num_enemies==0){
+
+        let w = main_win.offsetWidth - bullet.offsetWidth;
+        if ( w <= counter )
+        {
+            bullet.parentNode.removeChild(bullet);
+            //bull1=0;
+            clearInterval(interval);
+        }
+        else{
+            counter += 5;
+            bullet.style.left = (counter++  )+"px";
+            
+        }
+    }    
+    else{
         for( var i=0 ; i<num_enemies ; i++){
 
             var enemy = enemy_arr;
             if (!(counter >= enemy[i].offsetLeft) )
             {
-                bullet.style.left = (counter++)+"px";
+                counter+=5;
+                bullet.style.left = (counter)+"px";
             }
             else if (counter >= enemy[i].offsetLeft && bullet.offsetTop > enemy[i].offsetTop && bullet.offsetTop < (enemy[i].offsetTop+enemy[i].offsetHeight))
             {
                 bullet.parentNode.removeChild(bullet);
+                setTimeout(clearInterval(interval), 1);
                 //reduce enemys' health
                 enemy_health[i]=enemy_health[i]-bullet_damage;
                 if (enemy_health[i]<=0)
@@ -282,31 +304,38 @@ function shoot() {
                     enemy[i].style.display="none";
                     num_enemies--;
                     clearInterval(enemy_interval[i]);
-                    setTimeout(clearInterval(interval), 1);
+                    //setTimeout(clearInterval(interval), 1);
                 }
 
             }
+           
             else
             {
+                let w = main_win.offsetWidth - bullet.offsetWidth;
+                if ( w <= counter )
+                {
+                    bullet.parentNode.removeChild(bullet);
+                    //bull1=0;
+                    clearInterval(interval);
+                }
+                else{
+                    counter += 5;
+                    bullet.style.left = (counter++  )+"px";
+                    
+                }
+                    /*
+                counter+=20;
+                bullet.style.left = (counter)+"px";
                 bullet.parentNode.removeChild(bullet);
                 setTimeout(clearInterval(interval), 1);
-            }
-            
+                */
+            }   
+           
         }
-        if(num_enemies==0){
 
-            let w = main_win.offsetWidth - bullet.offsetWidth;
-            if ( w <= counter )
-            {
-                bullet.parentNode.removeChild(bullet);
-                clearInterval(interval);
-            }
-            else{
-                bull1 += 20;
-                bullet.style.left = (counter++)+"px";
-                
-            }
-        }
+    }    
+
+     
     }
     var interval = setInterval(move_bullet,1);
 }
@@ -335,18 +364,20 @@ function shoot_enemy( k) {
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
             console.log(bullet.style.top);
             console.log(bullet.style.left);
+
             function move_bullet(){
-                    console.log("yaa");
+                    //console.log("yaa");
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
                         bullet.style.left = (counter--)+"px";
                     }
-                    else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight))
+                    else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
                         bullet.parentNode.removeChild(bullet);
-                        //reduce enemys' health
+                        //reduce enemys' healthet
                         health=health-bullet_damage;
+                        console.log("hit");
                         setTimeout(clearInterval(interval), 1);
                         if (health<=0)
                         {
@@ -357,8 +388,21 @@ function shoot_enemy( k) {
                     }
                     else
                     {
-                        bullet.parentNode.removeChild(bullet);
-                        setTimeout(clearInterval(interval), 1);
+
+                        let w = main_win.offsetWidth - bullet.offsetWidth;
+                        if ( w <= counter )
+                        {
+                            bullet.parentNode.removeChild(bullet);
+                            //bull1=0;
+                            clearInterval(interval);
+                        }
+                        else{
+                            bullet.style.left = (counter--  )+"px";
+                            
+                        }
+
+                        //bullet.parentNode.removeChild(bullet);
+                        //setTimeout(clearInterval(interval), 1);
                     }
                     
                 }
@@ -398,3 +442,23 @@ function collect (event){
 document.addEventListener('keydown',collect);
 
 //============================================================ EON :v /
+
+
+
+
+function coll() {
+    var counter=character.offsetLeft+character.offsetWidth;
+    for( var i=0 ; i<num_enemies ; i++)
+    {
+            var enemy = enemy_arr;
+            if ((character.offsetLeft+character.offsetWidth) >= enemy[i].offsetLeft && (character.offsetTop +character.offsetHeight )>= (enemy[i].offsetTop) && (character.offsetLeft) <= enemy[i].offsetLeft+enemy[i].offsetWidth)
+            {
+                
+                health=0;
+                alert("game over");
+            }
+            
+    }
+    
+
+}
