@@ -352,6 +352,8 @@ function shoot_enemy( k) {
                         {
                             alert("game over");
                             health=100;
+                            storage['lives'] -=1;
+                            localStorage.setItem('gameStorage', JSON.stringify(storage));
                         }
 
                     }
