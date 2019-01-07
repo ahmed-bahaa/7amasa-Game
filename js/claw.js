@@ -7,7 +7,7 @@ let jumpFlag=0;
 let gravity=0;
 let health=100;
 let score=0;
-
+let bullet_damage=50;
 //character attributes
 jump_power=35;
 
@@ -29,7 +29,7 @@ document.addEventListener( 'keydown', move );
 let enemy_health = [];
 let num_enemies;
 let enemy_arr;
-
+let enemy_interval=[];
 function draw_enemy(){
     enemy_arr=document.getElementsByClassName("ene");
     let rand_ene=Math.floor((Math.random() * 2) + 1);
@@ -43,13 +43,20 @@ function draw_enemy(){
     if( rand_ene ===1 ){
         enemy_arr[0].style.display="block";
         enemy_health[0] = 100;
+        //shoot_enemy(0);
+        enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },3000);
     }
     else{
         enemy_arr[0].style.display="block";
         enemy_arr[1].style.display="block";
         enemy_health[0]=100;
         enemy_health[1]=100;
+        shoot_enemy(0);
+        shoot_enemy(1);
+        enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },6000);
+        enemy_interval[1] = setInterval(function(){ shoot_enemy(1); },6000);
     }
+
 }
 
 
@@ -175,7 +182,6 @@ function land()
 
 
 /*
-
 // scenario 1: 
 max=2                                            [[done]]
 image-enemy                                      [[done]]
@@ -188,17 +194,21 @@ rebuild with background health                   [[done]]
 // fix if there is no enemies                    [[done]]
 collision                                        [[done]]
 
+hit-> character-health --                        [[done]]
+// reduce health for enemies                     [[done]]
+shoot-interval (enemy shoot)                     [[done]]
 ======================
-shoot-interval (enemy shoot)
-hit-> character-health --
 
-// reduce health for enemies
+
+//hero's lives
+// show score 
 // collision between character and enemy 
-// levels 
 // characters (images)
 // background (images)
 
+// levels 
 
+enemies move and jump [[later]]
 */
 
 
@@ -206,7 +216,6 @@ hit-> character-health --
 
 
 draw_enemy();   
-
 
 
 
@@ -227,6 +236,7 @@ var lp= function loop(bullet) {
     setTimeout(lp(bullet), 2);
 }
 var arrOfEnemies = [];
+
 function shoot() {
     var counter=character.offsetLeft+50;
     var bullet = document.createElement("img");
@@ -246,11 +256,16 @@ function shoot() {
             else if (counter >= enemy[i].offsetLeft && bullet.offsetTop > enemy[i].offsetTop && bullet.offsetTop < (enemy[i].offsetTop+enemy[i].offsetHeight))
             {
                 bullet.parentNode.removeChild(bullet);
-                enemy[i].style.display="none";
-                //reduce health
-                num_enemies--;
+                //reduce enemys' health
+                enemy_health[i]=enemy_health[i]-bullet_damage;
+                if (enemy_health[i]<=0)
+                {
+                    enemy[i].style.display="none";
+                    num_enemies--;
+                    clearInterval(enemy_interval[i]);
+                    setTimeout(clearInterval(interval), 1);
+                }
 
-                setTimeout(clearInterval(interval), 1);
             }
             else
             {
@@ -260,24 +275,18 @@ function shoot() {
             
         }
         if(num_enemies==0){
-            
-            
 
             let w = main_win.offsetWidth - bullet.offsetWidth;
-    
-            //  console.log(w);
-                if ( w <= counter )
-                {
-                    bullet.parentNode.removeChild(bullet);
-                    clearInterval(interval);
-                }
-                else{
-                    //console.log(character_run[i]);
-                    
-                    bull1 += 20;
-                    bullet.style.left = (counter++)+"px";
-                    
-                }
+            if ( w <= counter )
+            {
+                bullet.parentNode.removeChild(bullet);
+                clearInterval(interval);
+            }
+            else{
+                bull1 += 20;
+                bullet.style.left = (counter++)+"px";
+                
+            }
         }
     }
     var interval = setInterval(move_bullet,1);
@@ -292,5 +301,65 @@ document.onkeydown = function (e) {
 }
 
 
+//enemys' shoots
 
+function shoot_enemy( k) {
 
+            console.log("bang bang!");
+            var counter=enemy_arr[k].offsetLeft-50;
+            console.log(enemy_arr[k].offsetLeft);
+            console.log(counter);
+            var bullet = document.createElement("img");
+            bullet.className = "bullet";
+            main_win.appendChild(bullet);
+            bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
+            bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
+            console.log(bullet.style.top);
+            console.log(bullet.style.left);
+            function move_bullet(){
+                    console.log("yaa");
+                    var enemy = document.getElementById("man");
+                    if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
+                    {
+                        bullet.style.left = (counter--)+"px";
+                    }
+                    else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight))
+                    {
+                        bullet.parentNode.removeChild(bullet);
+                        //reduce enemys' health
+                        health=health-bullet_damage;
+                        setTimeout(clearInterval(interval), 1);
+                        if (health<=0)
+                        {
+                            alert("game over");
+                            health=100;
+                        }
+
+                    }
+                    else
+                    {
+                        bullet.parentNode.removeChild(bullet);
+                        setTimeout(clearInterval(interval), 1);
+                    }
+                    
+                }
+                /*
+                if(num_enemies==0){
+
+                    let w = main_win.offsetWidth - bullet.offsetWidth;
+                    if ( w <= counter )
+                    {
+                        bullet.parentNode.removeChild(bullet);
+                        clearInterval(interval);
+                    }
+                    else{
+                        bull1 += 20;
+                        bullet.style.left = (counter++)+"px";
+                        
+                    }
+                }
+                */
+            var interval = setInterval(move_bullet,1);
+    }
+
+    
