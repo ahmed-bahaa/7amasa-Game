@@ -1,8 +1,8 @@
-//character positions 
+//character positions
 let pos1=0;
 let pos2=0;
 let bull1=0;
-let original = 13;
+let original = 5;
 let jumpFlag=0;
 let gravity=0;
 let health=100;
@@ -10,7 +10,7 @@ let score=0;
 let bullet_damage=50;
 let bullet_damage_ene=10;
 //character attributes
-jump_power=35;
+jump_power=40;
 let coincollector=0;
 //get elements
 let character = document.getElementById("man");
@@ -175,7 +175,7 @@ function jump(event){
     pos2=original;
     jumpFlag=1;
     gravity = setInterval(raise,15);
-    
+
 }
 
 
@@ -367,6 +367,7 @@ function shoot_enemy( k) {
             //console.log(enemy_arr[k].offsetLeft);
             //console.log(counter);
             var bullet = document.createElement("img");
+            bullet.src = "images/fire.gif";
             bullet.className = "enemyBullet ";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
