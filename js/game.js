@@ -96,7 +96,8 @@ function move(event){
     if(event.which === 39 )
     {
     //    console.log("hello");
-    right();  
+        right();
+
     }
 
     else if (event.which === 37)
@@ -423,7 +424,7 @@ function shoot_enemy( k) {
                             clearInterval(interval);
                         }
                         else{
-                            bullet.style.left = (counter--  )+"px";
+                            bullet.style.left = (counter-=2  )+"px";
                             
                         }
 
