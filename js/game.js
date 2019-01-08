@@ -263,8 +263,9 @@ function shoot() {
     var counter=character.offsetLeft+50;
     var bullet = document.createElement("img");
     bullet.className = "bullet";
+    bullet.src = "images/Shuriken.gif"
     main_win.appendChild(bullet);
-    bullet.style.top = (character.offsetTop+ 40)+"px";
+    bullet.style.top = (character.offsetTop+ 80)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
 
     function move_bullet(){
@@ -279,7 +280,7 @@ function shoot() {
             clearInterval(interval);
         }
         else{
-            counter += 5;
+            counter += 3;
             bullet.style.left = (counter++  )+"px";
             
         }
@@ -290,7 +291,7 @@ function shoot() {
             var enemy = enemy_arr;
             if (!(counter >= enemy[i].offsetLeft) )
             {
-                counter+=5;
+                counter+=3;
                 bullet.style.left = (counter)+"px";
             }
             else if (counter >= enemy[i].offsetLeft && bullet.offsetTop > enemy[i].offsetTop && bullet.offsetTop < (enemy[i].offsetTop+enemy[i].offsetHeight))
@@ -358,7 +359,7 @@ function shoot_enemy( k) {
             console.log(enemy_arr[k].offsetLeft);
             console.log(counter);
             var bullet = document.createElement("img");
-            bullet.className = "bullet";
+            bullet.className = "enemyBullet";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
