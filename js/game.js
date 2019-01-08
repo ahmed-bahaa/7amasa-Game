@@ -173,7 +173,7 @@ function jump(event){
    // console.log(original);
     pos2=original;
     jumpFlag=1;
-    gravity = setInterval(raise,21);
+    gravity = setInterval(raise,15);
     
 }
 
@@ -187,7 +187,7 @@ function raise()
     }   
     else{
         clearInterval(gravity);
-        gravity = setInterval(land,21);
+        gravity = setInterval(land,15);
     }
 }
 
@@ -366,7 +366,7 @@ function shoot_enemy( k) {
             //console.log(enemy_arr[k].offsetLeft);
             //console.log(counter);
             var bullet = document.createElement("img");
-            bullet.className = "enemyBullet";
+            bullet.className = "enemyBullet ";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
@@ -377,7 +377,7 @@ function shoot_enemy( k) {
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
-                        bullet.style.left = (counter--)+"px";
+                        bullet.style.left = (counter-=2)+"px";
                     }
                     else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
