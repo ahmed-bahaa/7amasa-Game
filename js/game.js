@@ -454,7 +454,16 @@ function coll() {
             var enemy = enemy_arr;
             if ((character.offsetLeft+character.offsetWidth) >= enemy[i].offsetLeft && (character.offsetTop +character.offsetHeight )>= (enemy[i].offsetTop) && (character.offsetLeft) <= enemy[i].offsetLeft+enemy[i].offsetWidth)
             {
-                console.log("crash");
+                
+                //check number of lives
+                // repeat this function when object collision hap. bet character and bullet               
+                let message = confirm("Ouch!! retry?");
+                if (message == true){
+                    location.reload();
+                }
+                else{
+                    window.location.href="../index.html"
+                }
                 health=0;
                 //alert("game over");
             }
