@@ -384,8 +384,21 @@ function shoot_enemy( k) {
                         {
                             alert("game over");
                             health=100;
-                            storage['lives'] -=1;
-                            localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            if(storage['lives'] > 0){
+                                storage['lives'] -=1;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            } else {
+                                //game over and reset
+                                alert("out of lives");
+                                if(storage['score'] > storage['highestScore']){
+                                    storage['highestScore']= storage['score'];
+                                    storage['level']=1;
+                                    storage['lives']=5;
+                                    storage['score']=0;
+                                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                    //redirect to home from here or whatever
+                                }
+                            }
                         }
 
                     }
@@ -434,7 +447,9 @@ let coins = document.getElementsByClassName('coin');
 
 function collect (event){
     for (let i=0; i<coins.length; i++){
-        if (character.getBoundingClientRect().left == coins[i].getBoundingClientRect().left){
+        if ((character.offsetLeft + character.offsetWidth) >= coins[i].offsetLeft 
+        && (character.offsetTop+character.offsetHeight) >= coins[i].offsetTop 
+        && (character.offsetLeft <= (coins[i].offsetLeft+coins[i].offsetWidth))){
             coins[i].style.visibility="hidden";
             coins[i].parentNode.removeChild(coins[i]);
             storage['score'] +=1;
