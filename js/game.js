@@ -8,10 +8,10 @@ let gravity=0;
 let health=100;
 let score=0;
 let bullet_damage=50;
-
+let bullet_damage_ene=10;
 //character attributes
 jump_power=35;
-
+let coincollector=0;
 //get elements
 let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
@@ -23,6 +23,14 @@ let i=0;    //character positions
 let j=0;    //background swapper 
 
 document.addEventListener( 'keydown', move );
+
+
+let lvlFld = document.getElementsByClassName("lvlFld")[0];
+//let weaponFld = document.getElementsByClassName("weaponFld")[0];
+let coinsFld  = document.getElementsByClassName("coinsFld")[0];
+let scoreFld  = document.getElementsByClassName("scoreFld")[0];
+let healthFld  = document.getElementsByClassName("healthFld")[0];
+let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
 
 
 //enemies 
@@ -157,8 +165,6 @@ function left( ){
     }
 
 }
-
-
 
 
 function jump(event){
@@ -301,6 +307,8 @@ function shoot() {
                 enemy_health[i]=enemy_health[i]-bullet_damage;
                 if (enemy_health[i]<=0)
                 {
+                    storage['score'] +=15;
+                    scoreFld.textContent= "score:"+storage['score'];
                     enemy[i].style.display="none";
                     num_enemies--;
                     clearInterval(enemy_interval[i]);
@@ -376,7 +384,9 @@ function shoot_enemy( k) {
                     {
                         bullet.parentNode.removeChild(bullet);
                         //reduce enemys' healthet
-                        health=health-bullet_damage;
+                        health=health-bullet_damage_ene;
+                        healthFld.textContent= "Health: "+health;
+
                         console.log("hit");
                         setTimeout(clearInterval(interval), 1);
                         if (health<=0)
@@ -385,6 +395,7 @@ function shoot_enemy( k) {
                             health=100;
                             if(storage['lives'] > 0){
                                 storage['lives'] -=1;
+                                livesField.textContent= "no.lives:x"+storage['lives'];
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
                             } else {
                                 //game over and reset
@@ -451,7 +462,11 @@ function collect (event){
         && (character.offsetLeft <= (coins[i].offsetLeft+coins[i].offsetWidth))){
             coins[i].style.visibility="hidden";
             coins[i].parentNode.removeChild(coins[i]);
-            storage['score'] +=1;
+            coincollector+=1;
+            coinsFld.textContent= "Coins:"+coincollector;
+            storage['score'] +=5;
+            scoreFld.textContent= "score:"+storage['score'];
+            
             localStorage.setItem('gameStorage', JSON.stringify(storage));
         }
     }

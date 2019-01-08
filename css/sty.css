@@ -28,14 +28,14 @@ body,html{
     position: absolute;
     top: 5%;
     left: 2%;
-    width: 17%;
+    width: 20%;
     height: 15%;
     z-index: 2;
     background-color: seagreen;
     border-radius: 0.5em;
-    font-size: 17px;
-    padding-left: 15px;
-    padding-top: 7px;
+    font-size: 1em;
+    padding-left: 1em;
+    padding-top: 2em;
     color: beige;
 }
 
@@ -52,11 +52,17 @@ body,html{
     padding-right:3em;
 }
 
-.lvlFld , .weaponFld {
+.lvlFld {
     display: inline;
     padding-right:3.3em;
 }
 
+/*
+.lvlFld , .weaponFld {
+    display: inline;
+    padding-right:3.3em;
+}
+*/
 .healthFld , .noLivesFld{
     display: inline;
     padding-right:2em;
