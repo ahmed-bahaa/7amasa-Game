@@ -353,17 +353,15 @@ document.onkeydown = function (e) {
 
 function shoot_enemy( k) {
 
-            console.log("bang bang!");
             var counter=enemy_arr[k].offsetLeft-50;
-            console.log(enemy_arr[k].offsetLeft);
-            console.log(counter);
+            //console.log(enemy_arr[k].offsetLeft);
+            //console.log(counter);
             var bullet = document.createElement("img");
             bullet.className = "bullet";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
-            console.log(bullet.style.top);
-            console.log(bullet.style.left);
+            
 
             function move_bullet(){
                     //console.log("yaa");
@@ -378,7 +376,7 @@ function shoot_enemy( k) {
                         //reduce enemys' healthet
                         health=health-bullet_damage;
                         console.log("hit");
-                        setTimeout(clearInterval(interval), 1);
+                        clearInterval(interval);
                         if (health<=0)
                         {
                             alert("game over");
@@ -392,7 +390,8 @@ function shoot_enemy( k) {
                     {
 
                         let w = main_win.offsetWidth - bullet.offsetWidth;
-                        if ( w <= counter )
+                        //if ( w <= counter )
+                        if(bullet.offsetLeft<=0)
                         {
                             bullet.parentNode.removeChild(bullet);
                             //bull1=0;
@@ -455,9 +454,9 @@ function coll() {
             var enemy = enemy_arr;
             if ((character.offsetLeft+character.offsetWidth) >= enemy[i].offsetLeft && (character.offsetTop +character.offsetHeight )>= (enemy[i].offsetTop) && (character.offsetLeft) <= enemy[i].offsetLeft+enemy[i].offsetWidth)
             {
-                
+                console.log("crash");
                 health=0;
-                alert("game over");
+                //alert("game over");
             }
             
     }
