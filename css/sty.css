@@ -1,6 +1,9 @@
 
 body,html{
     height: 100%;
+    margin: 0;
+    padding: 0;
+    /*text-align: center;*/
 }
 
 
@@ -69,7 +72,7 @@ body,html{
 }
 
 #man{
-   
+
     position: absolute;
     padding: 0px;
     width: 10%;
@@ -97,19 +100,21 @@ body,html{
     background-image: url(../images/profile_background.jpg);
     background-repeat: no-repeat;
     width: 100%;
-    height: inherit;
-    position: relative;
+
     background-size: cover;
 }
 
 #lives {
-    margin-left: 10vw;
+    margin-left: 1vw;
     width: 20vw;
-    height: 25vw;
     background-color: white;
     opacity: .8;
     text-align: center;
     color: red;
+    display: inline-block;
+}
+#livesCount,#level,#character{
+    margin: 0;
 }
 
 #livesImage {
@@ -120,11 +125,10 @@ body,html{
 
 
 #score {
-    margin-left: 10vw;
     width: 20vw;
     height: 20vw;
-    background-color: white;
     opacity: .8;
+    margin: 0 auto;
 }
 
 
@@ -132,11 +136,31 @@ body,html{
 /*========================= Mo3tasem */
 
 .bullet{
-    width: 15px;
-    height: 5px;
-    background-color: blueviolet;
+    width: 25px;
+    height: 25px;
     position: relative;
+}
 
+.live,.score,.level,.charchter{
+    float: left;
+    width: 20vw;
+    height: 65vh;
+    text-align: center;
+    background-color: white;
+    opacity: .8;
+    padding: 85px 20px;
+}
+
+#container{
+    display: inline-block;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+.enemyBullet{
+    width: 20px;
+    height: 4px;
+    position: relative;
+    background-color: brown;
 }
 /*
 #enemy{
