@@ -383,8 +383,21 @@ function shoot_enemy( k) {
                         {
                             alert("game over");
                             health=100;
-                            storage['lives'] -=1;
-                            localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            if(storage['lives'] > 0){
+                                storage['lives'] -=1;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            } else {
+                                //game over and reset
+                                alert("out of lives");
+                                if(storage['score'] > storage['highestScore']){
+                                    storage['highestScore']= storage['score'];
+                                    storage['level']=1;
+                                    storage['lives']=5;
+                                    storage['score']=0;
+                                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                    //redirect to home from here or whatever
+                                }
+                            }
                         }
 
                     }
