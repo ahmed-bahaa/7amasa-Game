@@ -433,7 +433,9 @@ let coins = document.getElementsByClassName('coin');
 
 function collect (event){
     for (let i=0; i<coins.length; i++){
-        if (character.getBoundingClientRect().left == coins[i].getBoundingClientRect().left){
+        if ((character.offsetLeft + character.offsetWidth) >= coins[i].offsetLeft 
+        && (character.offsetTop+character.offsetHeight) >= coins[i].offsetTop 
+        && (character.offsetLeft <= (coins[i].offsetLeft+coins[i].offsetWidth))){
             coins[i].style.visibility="hidden";
             coins[i].parentNode.removeChild(coins[i]);
             storage['score'] +=1;
