@@ -8,10 +8,10 @@ let gravity=0;
 let health=100;
 let score=0;
 let bullet_damage=50;
-
+let bullet_damage_ene=10;
 //character attributes
 jump_power=35;
-
+let coincollector=0;
 //get elements
 let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
@@ -23,6 +23,14 @@ let i=0;    //character positions
 let j=0;    //background swapper 
 
 document.addEventListener( 'keydown', move );
+
+
+let lvlFld = document.getElementsByClassName("lvlFld")[0];
+//let weaponFld = document.getElementsByClassName("weaponFld")[0];
+let coinsFld  = document.getElementsByClassName("coinsFld")[0];
+let scoreFld  = document.getElementsByClassName("scoreFld")[0];
+let healthFld  = document.getElementsByClassName("healthFld")[0];
+let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
 
 
 //enemies 
@@ -159,8 +167,6 @@ function left( ){
 }
 
 
-
-
 function jump(event){
 
    // console.log("ya sal7daaaaar nazl el sabbbt");
@@ -263,8 +269,9 @@ function shoot() {
     var counter=character.offsetLeft+50;
     var bullet = document.createElement("img");
     bullet.className = "bullet";
+    bullet.src = "images/Shuriken.gif"
     main_win.appendChild(bullet);
-    bullet.style.top = (character.offsetTop+ 40)+"px";
+    bullet.style.top = (character.offsetTop+ 80)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
 
     function move_bullet(){
@@ -279,7 +286,7 @@ function shoot() {
             clearInterval(interval);
         }
         else{
-            counter += 5;
+            counter += 3;
             bullet.style.left = (counter++  )+"px";
             
         }
@@ -290,7 +297,7 @@ function shoot() {
             var enemy = enemy_arr;
             if (!(counter >= enemy[i].offsetLeft) )
             {
-                counter+=5;
+                counter+=3;
                 bullet.style.left = (counter)+"px";
             }
             else if (counter >= enemy[i].offsetLeft && bullet.offsetTop > enemy[i].offsetTop && bullet.offsetTop < (enemy[i].offsetTop+enemy[i].offsetHeight))
@@ -301,6 +308,8 @@ function shoot() {
                 enemy_health[i]=enemy_health[i]-bullet_damage;
                 if (enemy_health[i]<=0)
                 {
+                    storage['score'] +=15;
+                    scoreFld.textContent= "score:"+storage['score'];
                     enemy[i].style.display="none";
                     num_enemies--;
                     clearInterval(enemy_interval[i]);
@@ -357,7 +366,7 @@ function shoot_enemy( k) {
             //console.log(enemy_arr[k].offsetLeft);
             //console.log(counter);
             var bullet = document.createElement("img");
-            bullet.className = "bullet";
+            bullet.className = "enemyBullet";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
@@ -374,15 +383,31 @@ function shoot_enemy( k) {
                     {
                         bullet.parentNode.removeChild(bullet);
                         //reduce enemys' healthet
-                        health=health-bullet_damage;
+                        health=health-bullet_damage_ene;
+                        healthFld.textContent= "Health: "+health;
+
                         console.log("hit");
                         clearInterval(interval);
                         if (health<=0)
                         {
                             alert("game over");
                             health=100;
-                            storage['lives'] -=1;
-                            localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            if(storage['lives'] > 0){
+                                storage['lives'] -=1;
+                                livesField.textContent= "no.lives:x"+storage['lives'];
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            } else {
+                                //game over and reset
+                                alert("out of lives");
+                                if(storage['score'] > storage['highestScore']){
+                                    storage['highestScore']= storage['score'];
+                                    storage['level']=1;
+                                    storage['lives']=5;
+                                    storage['score']=0;
+                                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                    //redirect to home from here or whatever
+                                }
+                            }
                         }
 
                     }
@@ -432,10 +457,16 @@ let coins = document.getElementsByClassName('coin');
 
 function collect (event){
     for (let i=0; i<coins.length; i++){
-        if (character.getBoundingClientRect().left == coins[i].getBoundingClientRect().left){
+        if ((character.offsetLeft + character.offsetWidth) >= coins[i].offsetLeft 
+        && (character.offsetTop+character.offsetHeight) >= coins[i].offsetTop 
+        && (character.offsetLeft <= (coins[i].offsetLeft+coins[i].offsetWidth))){
             coins[i].style.visibility="hidden";
             coins[i].parentNode.removeChild(coins[i]);
-            storage['score'] +=1;
+            coincollector+=1;
+            coinsFld.textContent= "Coins:"+coincollector;
+            storage['score'] +=5;
+            scoreFld.textContent= "score:"+storage['score'];
+            
             localStorage.setItem('gameStorage', JSON.stringify(storage));
         }
     }
