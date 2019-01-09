@@ -22,8 +22,8 @@ if(storage['characterId'] == 'char1'){
 }
 
 let sound = new Audio();
-sound.src = "1.mp3";
-let btn = document.getElementById("btn");
+sound.src = "js/1.mp3";
+let btn = document.getElementById("audioImg");
 let counter = 0;
 function manageAudio()
 {
