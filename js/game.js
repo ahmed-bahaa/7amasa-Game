@@ -837,4 +837,5 @@ let livesNumber = storage['lives'];
 levelField.textContent= "LVL.:1";
 coinsField.textContent= "Coins:"+coinsNumber;
 livesField.textContent= "no.lives:x"+livesNumber;
+
 //============================================================ EON :v /
