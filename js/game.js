@@ -17,7 +17,10 @@ let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
 
 // images
-let character_run = ["images/im.png","images/im2.png"];
+let character_run = ["images/char1/ninja-1.png","images/char1/ninja-2.png","images/char1/ninja-3.png","images/char1/ninja-4.png",
+                    "images/char1/ninja-5.png"];
+let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
+"images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
 let background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
 let i=0;    //character positions
 let j=0;    //background swapper 
@@ -39,6 +42,7 @@ let enemy_health = [];
 let num_enemies;
 let enemy_arr;
 let enemy_interval=[];
+
 
 
 //==========================coins================================== Nada /
@@ -221,7 +225,6 @@ health                                           [[done]]
 rebuild with background health                   [[done]]
 // fix if there is no enemies                    [[done]]
 collision                                        [[done]]
-
 hit-> character-health --                        [[done]]
 // reduce health for enemies                     [[done]]
 shoot-interval (enemy shoot)                     [[done]]
@@ -360,7 +363,7 @@ document.onkeydown = function (e) {
 
 //enemys' shoots
 
-function shoot_enemy( k) {
+function shoot_enemy(k) {
 
             var counter=enemy_arr[k].offsetLeft-50;
             //console.log(enemy_arr[k].offsetLeft);
@@ -382,23 +385,37 @@ function shoot_enemy( k) {
                     else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
                         bullet.parentNode.removeChild(bullet);
-                        //reduce enemys' healthet
+
+                        //reduce enemys' health
                         health=health-bullet_damage_ene;
+                        character.src="images/char1/ninja-6.png";
+                        setTimeout(function(){ character.src="images/char1/ninja-1.png"; }, 100);
+
                         healthFld.textContent= "Health: "+health;
 
                         console.log("hit");
                         clearInterval(interval);
                         if (health<=0)
                         {
-                            alert("game over");
+                            //alert("game over");
                             health=100;
                             if(storage['lives'] > 0){
                                 storage['lives'] -=1;
                                 livesField.textContent= "no.lives:x"+storage['lives'];
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
+
+                                // action when user die with enough lives 
+                                let message = confirm("trying is the first step to failure :) retry?");
+                                if (message == true){
+                                    location.reload();
+                                }
+                                else{
+                                    window.location.href="index.html"
+                                }
+
                             } else {
                                 //game over and reset
-                                alert("out of lives");
+                                
                                 if(storage['score'] > storage['highestScore']){
                                     storage['highestScore']= storage['score'];
                                     storage['level']=1;
@@ -406,7 +423,12 @@ function shoot_enemy( k) {
                                     storage['score']=0;
                                     localStorage.setItem('gameStorage', JSON.stringify(storage));
                                     //redirect to home from here or whatever
+                                    // action when user die without enough lives 
+                                    
+                                    
                                 }
+                                alert("you are such a loser :) back to main menu");
+                                window.location.href="index.html"
                             }
                         }
 
@@ -487,7 +509,37 @@ function coll() {
             {
                 
                 //check number of lives
-                // repeat this function when object collision hap. bet character and bullet               
+
+                if(storage['lives'] > 0){
+                    storage['lives'] -=1;
+                    livesField.textContent= "no.lives:x"+storage['lives'];
+                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+
+                    // action when user die with enough lives 
+                    let message = confirm("trying is the first step to failure :) retry?");
+                    if (message == true){
+                        location.reload();
+                    }
+                    else{
+                        window.location.href="index.html"
+                    }
+
+                } else {
+                    //game over and reset
+                    //redirect to home from here or whatever
+                    // action when user die without enough lives 
+                    alert("you are such a loser :) back to main menu");
+                    if(storage['score'] > storage['highestScore']){
+                        storage['highestScore']= storage['score'];
+                        storage['level']=1;
+                        storage['lives']=5;
+                        storage['score']=0;
+                        localStorage.setItem('gameStorage', JSON.stringify(storage));
+                        }
+                    window.location.href="index.html"
+                }
+
+                /*  
                 let message = confirm("Ouch!! retry?");
                 if (message == true){
                     location.reload();
@@ -497,6 +549,7 @@ function coll() {
                 }
                 health=0;
                 //alert("game over");
+                */
             }
             
     }
