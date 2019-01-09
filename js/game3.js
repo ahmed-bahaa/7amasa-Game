@@ -278,11 +278,7 @@ function right( ){
                             //redirect to lmain menu
                             if(storage['score'] > storage['highestScore']){
                                 storage['highestScore']= storage['score'];
-<<<<<<< HEAD:js/game.js
-                                storage['level']=1;
-=======
                                 storage['level']=3;
->>>>>>> 6c5aba63b925bd8c3ed934c3ee0166e564f84e52:js/game3.js
                                 storage['lives']=5;
                                 storage['score']=0;
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
