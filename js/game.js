@@ -10,7 +10,7 @@ let gravity=0;
 let health=100;
 let score=0;
 let bullet_damage=50;
-
+let fireSound;
 let bullet_damage_ene=50;
 let character_run = [];
 
@@ -377,7 +377,7 @@ function shoot() {
 
      
     }
-    var interval = setInterval(move_bullet,1);
+   
 }
 document.onkeydown = function (e) {
 
@@ -405,15 +405,16 @@ function shoot_enemy(k) {
             
 
             function move_bullet(){
+
                     //console.log("yaa");
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
-                        if( storage['score'] <800 )
+                        if( storage['level'] === 1 )
                         {
                             bullet.style.left = (counter-=2)+"px";
                         }
-                        else if (storage['score'] <1200)
+                        else if (storage['level'] === 2)
                         {
                             bullet.style.left = (counter-=3)+"px";
                         }
