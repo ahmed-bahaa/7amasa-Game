@@ -14,7 +14,7 @@ function checkLevel(id)
 {
     if (id<=level)
     {
-        window.open('level_1.html','_self');
+        window.open('level_'+id+'.html','_self');
     }
     else
     {

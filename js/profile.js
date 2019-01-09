@@ -21,7 +21,9 @@ badge1 = document.getElementById("badge1");
 badge2 = document.getElementById("badge2");
 badge3 = document.getElementById("badge3");
 
-
+badge1.style.display = "none";
+badge2.style.display = "none";
+badge3.style.display = "none";
 
 if (storage['level'] === 2)
 {
