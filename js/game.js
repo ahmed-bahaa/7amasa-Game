@@ -8,7 +8,7 @@ let gravity=0;
 let health=100;
 let score=0;
 let bullet_damage=50;
-let bullet_damage_ene=10;
+let bullet_damage_ene=50;
 //character attributes
 jump_power=40;
 let coincollector=0;
@@ -21,7 +21,7 @@ let character_run = ["images/char1/ninja-1.png","images/char1/ninja-2.png","imag
                     "images/char1/ninja-5.png"];
 let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
 "images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
-let background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
+let background_images = ["url(images/levels_images/back1.jpg)"];
 let i=0;    //character positions
 let j=0;    //background swapper 
 
@@ -93,6 +93,16 @@ function draw_enemy(){
 
 
 //functions
+
+
+//sleep
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  
+
 
 function move(event){
     
@@ -400,6 +410,13 @@ function shoot_enemy(k) {
                         if (health<=0)
                         {
                             //alert("game over");
+                            setTimeout( async function(){
+                                for(var i=0 ; i< character_die.length ; i++){
+                                    character.src=character_die[i];
+                                    console.log(character.src);
+                                    await sleep(200);
+                                }
+                            },0);
                             health=100;
                             if(storage['lives'] > 0){
                                 storage['lives'] -=1;
@@ -511,6 +528,13 @@ function coll() {
             {
                 
                 //check number of lives
+                setTimeout( async function(){
+                    for(var i=0 ; i< character_die.length ; i++){
+                        character.src=character_die[i];
+                        console.log(character.src);
+                        await sleep(200);
+                    }
+                },0);
 
                 if(storage['lives'] > 0){
                     storage['lives'] -=1;
