@@ -392,7 +392,18 @@ function shoot_enemy( k) {
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
-                        bullet.style.left = (counter-=2)+"px";
+                        if( storage['score'] <800 )
+                        {
+                            bullet.style.left = (counter-=2)+"px";
+                        }
+                        else if (storage['score'] <1200)
+                        {
+                            bullet.style.left = (counter-=3)+"px";
+                        }
+                        else
+                        {
+                            bullet.style.left = (counter-=4)+"px";
+                        }
                     }
                     else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
