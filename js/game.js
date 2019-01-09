@@ -32,7 +32,7 @@ let background_images = ["url(images/levels_images/back1.jpg)"];
 
 let char1_chars = ["images/char1/1.png","images/char1/2.png","images/char1/3.png","images/char1/4.png","images/char1/5.png","images/char1/6.png"];
 let char2_chars = ["images/char2/1.png","images/char2/2.png","images/char2/3.png","images/char2/4.png","images/char2/5.png"]
-if(  ['characterId'] === "char1" )
+if(  storage['characterId'] === "char1" )
 {
     character_run =char1_chars;
 }
