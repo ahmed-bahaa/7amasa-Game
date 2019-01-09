@@ -1,6 +1,7 @@
 body
 {
     background-image: url("../images/index1.png");
+    background-size: 100vw 100vh;
     margin: 0;
 }
 .box
@@ -17,7 +18,7 @@ body
   border-radius: 50%;
   top: 2%;
   left: 15%;
-  -webkit-animation: bounce 2s linear infinite;
+  animation: bounce 3s linear infinite;
 
 }
 @-webkit-keyframes bounce {
@@ -93,9 +94,51 @@ body
     transform-origin: center bottom;
   }
 
+
+  @-webkit-keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+  }
+
 #home1 , #home2 , #home3
 {
     position: absolute;
+    animation: pulse 3s linear infinite;
+    
     /* z-index: 1; */
 }
 #home1
@@ -121,20 +164,20 @@ body
 #unlock1
 {
     width: 5%;
-    top: 20em;
-    right: 59em;
+    top: 8em;
+    right: 64em;
 }
 
 #unlock2
 {
     width: 4%;
-    top: 15em;
-    right: 47em;
+    top: 10em;
+    right: 42em;
 }
 
 #unlock3
 {
     width: 4%;
-    top: 17em;
+    top: 13em;
     right: 26em;
 }
