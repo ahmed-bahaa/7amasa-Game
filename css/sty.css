@@ -89,7 +89,8 @@ body,html{
     padding: 0px;
     width: 10%;
     height: 20%;
-    bottom: 2%; /* previously = 13%*/
+    bottom: 2;
+    z-index: 1;
 }
 
 .ene{

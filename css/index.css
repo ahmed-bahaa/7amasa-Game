@@ -6,16 +6,17 @@ body{
 .char1{
     
     position: absolute;
-    top: 28%;
-    left: 20%;
+    top: 30%;
+    left: 12%;
     width:24%;
 }
+
 .char2{
     
     position: absolute;
-    top: 25%;
-    left: 35%;
-    width:23%;
+    top: 12%;
+    left: 29%;
+    width:30%;
 }
 .ship{
     position: absolute;

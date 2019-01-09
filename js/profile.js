@@ -16,3 +16,30 @@ document.getElementById('level').textContent= levels;
 
 document.getElementById('character').textContent= charId;
 
+
+badge1 = document.getElementById("badge1");
+badge2 = document.getElementById("badge2");
+badge3 = document.getElementById("badge3");
+
+
+
+if (storage['level'] === 2)
+{
+    badge1.style.display = "inline-block";
+}
+else if(storage['level'] === 3)
+{
+    badge1.style.display = "inline-block";
+    badge2.style.display = "inline-block";
+}
+else if (storage['level'] === 4)
+{
+    badge1.style.display = "inline-block";
+    badge2.style.display = "inline-block";
+    badge3.style.display = "inline-block";
+}
+else {
+    badge1.style.display = "none";
+    badge2.style.display = "none";
+    badge3.style.display = "none";
+}
