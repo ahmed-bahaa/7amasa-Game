@@ -1,18 +1,4 @@
 
-<<<<<<< HEAD
-let pos1=0;
-let pos2=0;
-let bull1=0;
-let original = 5;
-let jumpFlag=0;
-let gravity=0;
-let health=100;
-let score=0;
-let bullet_damage=50;
-let fireSound;
-let bullet_damage_ene=50;
-let character_run = [];
-=======
 
 let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
@@ -21,7 +7,6 @@ let storage = JSON.parse(localStorage.getItem('gameStorage'));
 let pos1=0; let pos2=0; // x& y of character
 let original = 5; /* previously = 13*/
 let gravity=0; let jumpFlag=0;
->>>>>>> 609570fef9cd1b1a8bbe14388c93c604e63e3abc
 
 //character attributes
 let bullet_damage=50; //of the character
