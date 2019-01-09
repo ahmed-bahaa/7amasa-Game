@@ -12,15 +12,12 @@ for ( i=3; i>=level; i--)
 
 function checkLevel(id)
 {
-
     if (id<=level)
     {
         window.open('level_1.html','_self');
-
     }
     else
     {
         alert("you have not unlocked level"+id+"yet");
     }
-
 }

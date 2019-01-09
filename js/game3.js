@@ -56,11 +56,11 @@ let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
 
 let lvlEnd = document.getElementsByClassName("gameEnd")[0];
 
-let lvlFrame=4;
+let lvlFrame=8;
 let targScore;
 
 //enemies 
-let bullet_damage_ene=10;
+let bullet_damage_ene=25;
 let enemy_health = [];
 let totalEnemies=0;
 let enemy_arr;
@@ -120,9 +120,9 @@ function draw_enemy(){
 
     if( rand_ene ===1 ){
         enemy_arr[0].style.display="block";
-        enemy_health[0] = 100;
+        enemy_health[0] = 200;
         //shoot_enemy(0);
-        enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },3000);
+        enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },2000);
         
         totalEnemies+=1; //counting enemy number of the whole level
         console.log(totalEnemies);
@@ -130,12 +130,12 @@ function draw_enemy(){
     else{
         enemy_arr[0].style.display="block";
         enemy_arr[1].style.display="block";
-        enemy_health[0]=100;
-        enemy_health[1]=100;
+        enemy_health[0]=200;
+        enemy_health[1]=200;
         shoot_enemy(0);
         shoot_enemy(1);
-        enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },6000);
-        enemy_interval[1] = setInterval(function(){ shoot_enemy(1); },6000);
+        enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },5000);
+        enemy_interval[1] = setInterval(function(){ shoot_enemy(1); },5000);
 
         totalEnemies+=2  ; //counting enemy number of the whole level
         console.log(totalEnemies);
@@ -222,7 +222,7 @@ function right( ){
             {
             
                 // targScore=(totalEnemies*(2*bullet_damage) + 4) * lvlFrame;
-                targScore=200;
+                targScore=600;
                 console.log(targScore);
                 
                 if(storage['score']>(targScore*0.8)) //if player meets target score by 80%
@@ -234,7 +234,7 @@ function right( ){
                         //redirect to same lvl again
                         if(storage['score'] > storage['highestScore']){
                             storage['highestScore']= storage['score'];
-                            storage['level']=2;//on winning set the opened lvl to lv2
+                            storage['level']=4;//on winning set the opened lvl to lv2
                             storage['lives']=5;
                             storage['score']=0;
                             localStorage.setItem('gameStorage', JSON.stringify(storage));
@@ -243,31 +243,17 @@ function right( ){
                     }
                     else 
                     {
-                        messageWin = confirm("Play next level!"); 
-                        if(messageWin)
-                        {
-                            //redirect to lvl+1
-                            if(storage['score'] > storage['highestScore']){
-                                storage['highestScore']= storage['score'];
-                                storage['level']=2; //on winning set the opened lvl to lv2
-                                storage['lives']=5;
-                                storage['score']=0;
-                                localStorage.setItem('gameStorage', JSON.stringify(storage));
-                                }
-                            window.location.href="level_2.html";
-                        }
-                        else
-                        {
                             //redirect to map
+                            alert("Thank you!");
                             if(storage['score'] > storage['highestScore']){
                                 storage['highestScore']= storage['score'];
-                                storage['level']=2; //on winning set the opened lvl to lv2
+                                storage['level']=4; //on winning set the opened lvl to lv4
                                 storage['lives']=5;
                                 storage['score']=0;
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
                                 }
                             window.location.href="map.html";
-                        }
+                       
                     }
                 }
                 else //if score is less
@@ -280,7 +266,7 @@ function right( ){
                         //redirect to same lvl again
                         if(storage['score'] > storage['highestScore']){
                             storage['highestScore']= storage['score'];
-                            storage['level']=1;
+                            storage['level']=3;
                             storage['lives']=5;
                             storage['score']=0;
                             localStorage.setItem('gameStorage', JSON.stringify(storage));
@@ -290,6 +276,13 @@ function right( ){
                     else 
                     {
                             //redirect to lmain menu
+                            if(storage['score'] > storage['highestScore']){
+                                storage['highestScore']= storage['score'];
+                                storage['level']=3;
+                                storage['lives']=5;
+                                storage['score']=0;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                }
                             window.location.href="index.html";
     
                     }
@@ -757,7 +750,7 @@ let levelNumber = storage['level'];
 let coinsNumber = storage['score'];
 let livesNumber = storage['lives'];
 
-levelField.textContent= "LVL.:1";
+levelField.textContent= "LVL.:3";
 coinsField.textContent= "Coins:"+coinsNumber;
 livesField.textContent= "no.lives:x"+livesNumber;
 //============================================================ EON :v /
