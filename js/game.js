@@ -445,6 +445,7 @@ function shoot() {
 
      
     }
+    var interval = setInterval(move_bullet,1);
    
 }
 document.onkeydown = function (e) {
