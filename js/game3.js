@@ -54,6 +54,10 @@ let scoreFld  = document.getElementsByClassName("scoreFld")[0];
 let healthFld  = document.getElementsByClassName("healthFld")[0];
 let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
 
+storage['score']=0;
+scoreFld.textContent=['score'];
+
+
 let lvlEnd = document.getElementsByClassName("gameEnd")[0];
 
 let lvlFrame=8;

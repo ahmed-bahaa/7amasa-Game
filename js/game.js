@@ -2,6 +2,7 @@
 
 let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
+
 //===============================CHARACTER========================
 //character positions 
 let pos1=0; let pos2=0; // x& y of character
@@ -53,6 +54,9 @@ let coinsFld  = document.getElementsByClassName("coinsFld")[0];
 let scoreFld  = document.getElementsByClassName("scoreFld")[0];
 let healthFld  = document.getElementsByClassName("healthFld")[0];
 let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
+
+storage['score']=0;
+scoreFld.textContent=['score'];
 
 let lvlEnd = document.getElementsByClassName("gameEnd")[0];
 
