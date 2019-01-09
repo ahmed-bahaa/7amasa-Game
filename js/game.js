@@ -1,29 +1,27 @@
-//character positions
+
+
 let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
-let pos1=0;
-let pos2=0;
-let bull1=0;
-let original = 5;
-let jumpFlag=0;
-let gravity=0;
-let health=100;
-let score=0;
-let bullet_damage=50;
-
-let bullet_damage_ene=50;
-let character_run = [];
+//===============================CHARACTER========================
+//character positions 
+let pos1=0; let pos2=0; // x& y of character
+let original = 5; /* previously = 13*/
+let gravity=0; let jumpFlag=0;
 
 //character attributes
-jump_power=40;
+let bullet_damage=50; //of the character
+jump_power=35;
+
+let health=100;
+let score=0;
 let coincollector=0;
+let character_run = [];
+//===================================================================
 //get elements
 let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
 
 // images
-
-
 let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
 "images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
 let background_images = ["url(images/levels_images/back1.jpg)"];
@@ -47,19 +45,46 @@ document.addEventListener( 'keydown', move );
 
 
 let lvlFld = document.getElementsByClassName("lvlFld")[0];
-//let weaponFld = document.getElementsByClassName("weaponFld")[0];
 let coinsFld  = document.getElementsByClassName("coinsFld")[0];
 let scoreFld  = document.getElementsByClassName("scoreFld")[0];
 let healthFld  = document.getElementsByClassName("healthFld")[0];
 let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
 
+let lvlEnd = document.getElementsByClassName("gameEnd")[0];
+
+let lvlFrame=4;
+let targScore;
 
 //enemies 
-
+let bullet_damage_ene=10;
 let enemy_health = [];
-let num_enemies;
+let totalEnemies=0;
 let enemy_arr;
 let enemy_interval=[];
+
+//========================= SCORING =================================
+
+function compareScore () 
+{ //called when last frame is reached
+    let targScore=(totalEnemies*(2*bullet_damage) + 4) * lvlFrame;
+    console.log(targScore);
+    if(storage['score']>(targScore*(80/100))) //if player meets target score by 80%
+    {   console.log("target score * 0.8: "+(targScore*0.8));
+        console.log("You win!");
+        return 1;
+    }
+    else //if score is less
+    {
+        console.log("You lose! Your score was "+storage['score']);
+    }
+
+    return 0;
+}
+
+
+//===================================================================
+
+document.addEventListener( 'keydown', move );
 
 
 
@@ -94,6 +119,9 @@ function draw_enemy(){
         enemy_health[0] = 100;
         //shoot_enemy(0);
         enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },3000);
+        
+        totalEnemies+=1; //counting enemy number of the whole level
+        console.log(totalEnemies);
     }
     else{
         enemy_arr[0].style.display="block";
@@ -104,6 +132,9 @@ function draw_enemy(){
         shoot_enemy(1);
         enemy_interval[0] = setInterval(function(){ shoot_enemy(0); },6000);
         enemy_interval[1] = setInterval(function(){ shoot_enemy(1); },6000);
+
+        totalEnemies+=2  ; //counting enemy number of the whole level
+        console.log(totalEnemies);
     }
 
 }
@@ -147,18 +178,31 @@ function move(event){
 function right( ){
   //  console.log("ya lahwaaaay");
     let w = main_win.offsetWidth - character.offsetWidth;
-    
   //  console.log(w);
     if ( w <= pos1 )
     {
-        console.log("ana wasalet");
-        pos1=0;
-        character.style.left=pos1 +"px";
-        console.log(background_images[j]);
-        j=(++j)%background_images.length;
-        main_win.style.backgroundImage=background_images[j];
-        draw_enemy(); 
-        generateCoins(100, 3);
+        if(lvlFrame>0) //checks if the level frames didn't end
+        {
+            console.log("ana wasalet");
+            pos1=0;
+            character.style.left=pos1 +"px";
+            console.log(background_images[j]);
+            j=(++j)%background_images.length;
+            main_win.style.backgroundImage=background_images[j];
+            draw_enemy(); 
+            generateCoins(100,3);
+
+            lvlFrame--;
+        }
+
+        else // reached the end of frames
+        {   pos1=0; 
+            character.style.left=pos1 +"px";
+            lvlEnd.style.left="30%";
+            lvlEnd.style.display="block";
+           
+            
+        }
     }
     else{
         //console.log(character_run[i]);
@@ -167,6 +211,26 @@ function right( ){
         pos1 += 20;
         character.style.left = pos1 + "px";
         coll();
+
+        if((character.offsetLeft + character.offsetWidth) >= lvlEnd.offsetLeft 
+            && (character.offsetTop+character.offsetHeight) >= lvlEnd.offsetTop 
+            && (character.offsetLeft <= (lvlEnd.offsetLeft+lvlEnd.offsetWidth)))           
+            {
+            
+                // targScore=(totalEnemies*(2*bullet_damage) + 4) * lvlFrame;
+                targScore=200;
+                console.log(targScore);
+                
+                if(storage['score']>(targScore*0.8)) //if player meets target score by 80%
+                {   console.log("target score * 0.8: "+(targScore*0.8));
+                    console.log("You win!");
+                }
+                else //if score is less
+                {
+                    console.log("You lose! Your score was "+storage['score']);
+                }
+
+            }
     }
 
 }
@@ -313,7 +377,7 @@ function shoot() {
         if ( w <= counter )
         {
             bullet.parentNode.removeChild(bullet);
-            //bull1=0;
+        
             clearInterval(interval);
         }
         else{
@@ -355,7 +419,7 @@ function shoot() {
                 if ( w <= counter )
                 {
                     bullet.parentNode.removeChild(bullet);
-                    //bull1=0;
+                
                     clearInterval(interval);
                 }
                 else{
@@ -489,7 +553,7 @@ function shoot_enemy(k) {
                         if(bullet.offsetLeft<=0)
                         {
                             bullet.parentNode.removeChild(bullet);
-                            //bull1=0;
+                            
                             clearInterval(interval);
                         }
                         else{
@@ -534,7 +598,7 @@ function collect (event){
             coins[i].parentNode.removeChild(coins[i]);
             coincollector+=1;
             coinsFld.textContent= "Coins:"+coincollector;
-            storage['score'] +=5;
+            storage['score']+=5;
             scoreFld.textContent= "score:"+storage['score'];
             
             localStorage.setItem('gameStorage', JSON.stringify(storage));
