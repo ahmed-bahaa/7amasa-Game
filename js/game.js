@@ -22,8 +22,11 @@ let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
 
 // images
+
+/*
 let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
 "images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
+*/
 let background_images = ["url(images/levels_images/back1.jpg)"];
 
 let char1_chars = ["images/char1/1.png","images/char1/2.png","images/char1/3.png","images/char1/4.png","images/char1/5.png","images/char1/6.png"];
@@ -144,11 +147,11 @@ function draw_enemy(){
 
 
 //sleep
-
+/*
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
+*/
   
 
 
@@ -492,8 +495,8 @@ function shoot_enemy(k) {
 
                         //reduce enemys' health
                         health=health-bullet_damage_ene;
-                        character.src="images/char1/ninja-6.png";
-                        setTimeout(function(){ character.src="images/char1/ninja-1.png"; }, 100);
+                        //character.src="images/char1/ninja-6.png";
+                        //setTimeout(function(){ character.src="images/char1/ninja-1.png"; }, 100);
 
                         healthFld.textContent= "Health: "+health;
 
@@ -503,6 +506,7 @@ function shoot_enemy(k) {
                         {
                             console.log(health);
                             //alert("game over");
+                           /*
                             setTimeout( async function(){
                                 for(var i=0 ; i< character_die.length ; i++){
                                     character.src=character_die[i];
@@ -510,6 +514,7 @@ function shoot_enemy(k) {
                                     await sleep(200);
                                 }
                             },0);
+                            */
                             health=100;
                             if(storage['lives'] > 0){
                                 storage['lives'] -=1;
