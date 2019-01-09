@@ -1,0 +1,29 @@
+body{
+
+    background-image: url("../images/index1.png");
+    background-size: cover;
+}
+.char1{
+    position: absolute;
+    top: 18%;
+    left: 5%;
+    width:20%;
+}
+.char2{
+    position: absolute;
+    top: 18%;
+    left: 25%;
+    width:20%;
+}
+#chosenChar{
+    position: absolute;
+    color: aliceblue;
+    bottom: 20%;
+    left: 20%;
+}
+#chooseChar{
+    position: absolute;
+    color: aliceblue;
+    top: 5%;
+    left: 20%;
+}

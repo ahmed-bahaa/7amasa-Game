@@ -1,8 +1,8 @@
-//character positions 
+//character positions
 let pos1=0;
 let pos2=0;
 let bull1=0;
-let original = 13;
+let original = 5;
 let jumpFlag=0;
 let gravity=0;
 let health=100;
@@ -10,7 +10,7 @@ let score=0;
 let bullet_damage=50;
 let bullet_damage_ene=10;
 //character attributes
-jump_power=35;
+jump_power=40;
 let coincollector=0;
 //get elements
 let character = document.getElementById("man");
@@ -100,7 +100,8 @@ function move(event){
     if(event.which === 39 )
     {
     //    console.log("hello");
-    right();  
+        right();
+
     }
 
     else if (event.which === 37)
@@ -177,8 +178,8 @@ function jump(event){
    // console.log(original);
     pos2=original;
     jumpFlag=1;
-    gravity = setInterval(raise,21);
-    
+    gravity = setInterval(raise,15);
+
 }
 
 
@@ -191,7 +192,7 @@ function raise()
     }   
     else{
         clearInterval(gravity);
-        gravity = setInterval(land,21);
+        gravity = setInterval(land,15);
     }
 }
 
@@ -369,7 +370,8 @@ function shoot_enemy(k) {
             //console.log(enemy_arr[k].offsetLeft);
             //console.log(counter);
             var bullet = document.createElement("img");
-            bullet.className = "enemyBullet";
+            bullet.src = "images/fire.gif";
+            bullet.className = "enemyBullet ";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
@@ -380,7 +382,7 @@ function shoot_enemy(k) {
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
-                        bullet.style.left = (counter--)+"px";
+                        bullet.style.left = (counter-=2)+"px";
                     }
                     else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
@@ -445,7 +447,7 @@ function shoot_enemy(k) {
                             clearInterval(interval);
                         }
                         else{
-                            bullet.style.left = (counter--  )+"px";
+                            bullet.style.left = (counter-=2  )+"px";
                             
                         }
 

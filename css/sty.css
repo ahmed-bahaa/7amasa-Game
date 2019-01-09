@@ -77,23 +77,23 @@ body,html{
     padding: 0px;
     width: 10%;
     height: 20%;
-    bottom: 13%;
+    bottom: 2%;
 }
 
 .ene{
     position: absolute;
     padding: 0px;
-    width: 10%;
-    height: 20%;
-    bottom: 13%;
+    width: 12%;
+    height: 25%;
+    bottom: 2%;
     display: none;
 }
 
 .coin {
     position: absolute;
-    width: 3%;
-    height: 6%;
-    bottom: 20%;
+    width: 2%;
+    height: 5%;
+    bottom: 7%;
 }
 
 #profile_background {
@@ -107,8 +107,6 @@ body,html{
 #lives {
     margin-left: 1vw;
     width: 20vw;
-    background-color: white;
-    opacity: .8;
     text-align: center;
     color: red;
     display: inline-block;
@@ -127,7 +125,7 @@ body,html{
 #score {
     width: 20vw;
     height: 20vw;
-    opacity: .8;
+    opacity: .7;
     margin: 0 auto;
 }
 
@@ -145,23 +143,54 @@ body,html{
 .live,.score,.level,.charchter{
     float: left;
     width: 20vw;
-    height: 65vh;
+    height: 25vh;
     text-align: center;
-    background-color: white;
-    opacity: .8;
-    padding: 85px 20px;
+    padding: 15px 20px;
 }
 
+.live h2,.score h2,.level h2,.charchter h2{
+    color: #f3d48f;
+    padding-top: 5px;
+}
 #container{
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 40px;
 }
 .enemyBullet{
     width: 20px;
-    height: 4px;
+    height: 20px;
     position: relative;
-    background-color: brown;
+}
+.backDiv{
+    position: absolute;
+    left: 60px;
+    bottom: 20px;
+}
+.backBtn{
+    width: 130px;
+    height: 50px;
+    border-radius: 5px;
+    border: brown dashed 2px;
+}
+
+
+.badge{
+    display: inline-block;
+    margin: 0 20px;
+    background-color:rgba(243,212,143,.3);
+    width: 25%;
+    height: 75%;
+}
+
+.profContainer{
+    height: 25%;
+}
+.badges{
+height:50%;
+    margin: 60px auto;
+    text-align: center;
+    color: burlywood;
 }
 /*
 #enemy{
