@@ -1,27 +1,48 @@
+
+
+let storage = JSON.parse(localStorage.getItem('gameStorage'));
+
 //===============================CHARACTER========================
 //character positions 
 let pos1=0; let pos2=0; // x& y of character
-let original = 13; let gravity=0; let jumpFlag=0;
+let original = 5; /* previously = 13*/
+let gravity=0; let jumpFlag=0;
 
 //character attributes
-let bullet_damage=50;
+let bullet_damage=50; //of the character
 jump_power=35;
 
 let health=100;
 let score=0;
 let coincollector=0;
-
+let character_run = [];
 //===================================================================
 //get elements
 let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
 
 // images
-let character_run = ["images/im.png","images/im2.png"];
-let background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
+let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
+"images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
+let background_images = ["url(images/levels_images/back1.jpg)"];
+
+let char1_chars = ["images/char1/1.png","images/char1/2.png","images/char1/3.png","images/char1/4.png","images/char1/5.png","images/char1/6.png"];
+let char2_chars = ["images/char2/1.png","images/char2/2.png","images/char2/3.png","images/char2/4.png","images/char2/5.png"]
+if( storage['characterId'] === "char1" )
+{
+    character_run =char1_chars;
+}
+else {
+    character_run =char2_chars;
+}
+
+
 let i=0;    //character positions
 let j=0;    //background swapper 
-//====================================================================
+
+character.src = character_run[0];
+document.addEventListener( 'keydown', move );
+
 
 let lvlFld = document.getElementsByClassName("lvlFld")[0];
 let coinsFld  = document.getElementsByClassName("coinsFld")[0];
@@ -66,8 +87,8 @@ function compareScore ()
 document.addEventListener( 'keydown', move );
 
 
+
 //==========================coins================================== Nada /
-let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
 function generateCoins(start, noOfCoins){
     let space=start;
@@ -121,13 +142,24 @@ function draw_enemy(){
 
 //functions
 
+
+//sleep
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  
+
+
 function move(event){
     
     //console.log(event.type);
     if(event.which === 39 )
     {
     //    console.log("hello");
-    right();  
+        right();
+
     }
 
     else if (event.which === 37)
@@ -237,8 +269,8 @@ function jump(event){
    // console.log(original);
     pos2=original;
     jumpFlag=1;
-    gravity = setInterval(raise,21);
-    
+    gravity = setInterval(raise,15);
+
 }
 
 
@@ -251,7 +283,7 @@ function raise()
     }   
     else{
         clearInterval(gravity);
-        gravity = setInterval(land,21);
+        gravity = setInterval(land,15);
     }
 }
 
@@ -285,7 +317,6 @@ health                                           [[done]]
 rebuild with background health                   [[done]]
 // fix if there is no enemies                    [[done]]
 collision                                        [[done]]
-
 hit-> character-health --                        [[done]]
 // reduce health for enemies                     [[done]]
 shoot-interval (enemy shoot)                     [[done]]
@@ -335,7 +366,7 @@ function shoot() {
     bullet.className = "bullet";
     bullet.src = "images/Shuriken.gif"
     main_win.appendChild(bullet);
-    bullet.style.top = (character.offsetTop+ 80)+"px";
+    bullet.style.top = (character.offsetTop+ 60)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
 
     function move_bullet(){
@@ -424,47 +455,78 @@ document.onkeydown = function (e) {
 
 //enemys' shoots
 
-function shoot_enemy( k) {
+function shoot_enemy(k) {
 
-            console.log("bang bang!");
             var counter=enemy_arr[k].offsetLeft-50;
-            console.log(enemy_arr[k].offsetLeft);
-            console.log(counter);
+            //console.log(enemy_arr[k].offsetLeft);
+            //console.log(counter);
             var bullet = document.createElement("img");
-            bullet.className = "enemyBullet";
+            bullet.src = "images/fire.gif";
+            bullet.className = "enemyBullet ";
             main_win.appendChild(bullet);
             bullet.style.top = (enemy_arr[k].offsetTop+ 40)+"px";
             bullet.style.left = (enemy_arr[k].offsetLeft- 95) + "px";
-            console.log(bullet.style.top);
-            console.log(bullet.style.left);
+            
 
             function move_bullet(){
                     //console.log("yaa");
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
-                        bullet.style.left = (counter--)+"px";
+                        if( storage['score'] <800 )
+                        {
+                            bullet.style.left = (counter-=2)+"px";
+                        }
+                        else if (storage['score'] <1200)
+                        {
+                            bullet.style.left = (counter-=3)+"px";
+                        }
+                        else
+                        {
+                            bullet.style.left = (counter-=4)+"px";
+                        }
                     }
                     else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
                         bullet.parentNode.removeChild(bullet);
-                        //reduce enemys' healthet
+
+                        //reduce enemys' health
                         health=health-bullet_damage_ene;
+                        character.src="images/char1/ninja-6.png";
+                        setTimeout(function(){ character.src="images/char1/ninja-1.png"; }, 100);
+
                         healthFld.textContent= "Health: "+health;
 
                         console.log("hit");
-                        setTimeout(clearInterval(interval), 1);
+                        clearInterval(interval);
                         if (health<=0)
                         {
-                            alert("game over");
+                            //alert("game over");
+                            setTimeout( async function(){
+                                for(var i=0 ; i< character_die.length ; i++){
+                                    character.src=character_die[i];
+                                    console.log(character.src);
+                                    await sleep(200);
+                                }
+                            },0);
                             health=100;
                             if(storage['lives'] > 0){
                                 storage['lives'] -=1;
                                 livesField.textContent= "no.lives:x"+storage['lives'];
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
+
+                                // action when user die with enough lives 
+                                let message = confirm("trying is the first step to failure :) retry?");
+                                if (message == true){
+                                    location.reload();
+                                }
+                                else{
+                                    window.location.href="index.html"
+                                }
+
                             } else {
                                 //game over and reset
-                                alert("out of lives");
+                                
                                 if(storage['score'] > storage['highestScore']){
                                     storage['highestScore']= storage['score'];
                                     storage['level']=1;
@@ -472,7 +534,12 @@ function shoot_enemy( k) {
                                     storage['score']=0;
                                     localStorage.setItem('gameStorage', JSON.stringify(storage));
                                     //redirect to home from here or whatever
+                                    // action when user die without enough lives 
+                                    
+                                    
                                 }
+                                alert("you are such a loser :) back to main menu");
+                                window.location.href="index.html"
                             }
                         }
 
@@ -481,14 +548,15 @@ function shoot_enemy( k) {
                     {
 
                         let w = main_win.offsetWidth - bullet.offsetWidth;
-                        if ( w <= counter )
+                        //if ( w <= counter )
+                        if(bullet.offsetLeft<=0)
                         {
                             bullet.parentNode.removeChild(bullet);
                             
                             clearInterval(interval);
                         }
                         else{
-                            bullet.style.left = (counter--  )+"px";
+                            bullet.style.left = (counter-=2  )+"px";
                             
                         }
 
@@ -551,8 +619,55 @@ function coll() {
             if ((character.offsetLeft+character.offsetWidth) >= enemy[i].offsetLeft && (character.offsetTop +character.offsetHeight )>= (enemy[i].offsetTop) && (character.offsetLeft) <= enemy[i].offsetLeft+enemy[i].offsetWidth)
             {
                 
+                //check number of lives
+                setTimeout( async function(){
+                    for(var i=0 ; i< character_die.length ; i++){
+                        character.src=character_die[i];
+                        console.log(character.src);
+                        await sleep(200);
+                    }
+                },0);
+
+                if(storage['lives'] > 0){
+                    storage['lives'] -=1;
+                    livesField.textContent= "no.lives:x"+storage['lives'];
+                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+
+                    // action when user die with enough lives 
+                    let message = confirm("trying is the first step to failure :) retry?");
+                    if (message == true){
+                        location.reload();
+                    }
+                    else{
+                        window.location.href="index.html"
+                    }
+
+                } else {
+                    //game over and reset
+                    //redirect to home from here or whatever
+                    // action when user die without enough lives 
+                    alert("you are such a loser :) back to main menu");
+                    if(storage['score'] > storage['highestScore']){
+                        storage['highestScore']= storage['score'];
+                        storage['level']=1;
+                        storage['lives']=5;
+                        storage['score']=0;
+                        localStorage.setItem('gameStorage', JSON.stringify(storage));
+                        }
+                    window.location.href="index.html"
+                }
+
+                /*  
+                let message = confirm("Ouch!! retry?");
+                if (message == true){
+                    location.reload();
+                }
+                else{
+                    window.location.href="../index.html"
+                }
                 health=0;
-                alert("game over");
+                //alert("game over");
+                */
             }
             
     }
