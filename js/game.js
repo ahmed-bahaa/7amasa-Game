@@ -1,4 +1,6 @@
 //character positions
+let storage = JSON.parse(localStorage.getItem('gameStorage'));
+
 let pos1=0;
 let pos2=0;
 let bull1=0;
@@ -8,7 +10,10 @@ let gravity=0;
 let health=100;
 let score=0;
 let bullet_damage=50;
+
 let bullet_damage_ene=50;
+let character_run = [];
+
 //character attributes
 jump_power=40;
 let coincollector=0;
@@ -17,14 +22,27 @@ let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
 
 // images
-let character_run = ["images/char1/ninja-1.png","images/char1/ninja-2.png","images/char1/ninja-3.png","images/char1/ninja-4.png",
-                    "images/char1/ninja-5.png"];
+
+
 let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
 "images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
 let background_images = ["url(images/levels_images/back1.jpg)"];
+
+let char1_chars = ["images/char1/1.png","images/char1/2.png","images/char1/3.png","images/char1/4.png","images/char1/5.png","images/char1/6.png"];
+let char2_chars = ["images/char2/1.png","images/char2/2.png","images/char2/3.png","images/char2/4.png","images/char2/5.png"]
+if( storage['characterId'] === "char1" )
+{
+    character_run =char1_chars;
+}
+else {
+    character_run =char2_chars;
+}
+
+
 let i=0;    //character positions
 let j=0;    //background swapper 
 
+character.src = character_run[0];
 document.addEventListener( 'keydown', move );
 
 
@@ -46,7 +64,6 @@ let enemy_interval=[];
 
 
 //==========================coins================================== Nada /
-let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
 function generateCoins(start, noOfCoins){
     let space=start;
@@ -285,7 +302,7 @@ function shoot() {
     bullet.className = "bullet";
     bullet.src = "images/Shuriken.gif"
     main_win.appendChild(bullet);
-    bullet.style.top = (character.offsetTop+ 80)+"px";
+    bullet.style.top = (character.offsetTop+ 60)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
 
     function move_bullet(){
@@ -392,7 +409,18 @@ function shoot_enemy(k) {
                     var enemy = document.getElementById("man");
                     if (!(counter <= (enemy.offsetLeft+enemy.offsetWidth)) )
                     {
-                        bullet.style.left = (counter-=2)+"px";
+                        if( storage['score'] <800 )
+                        {
+                            bullet.style.left = (counter-=2)+"px";
+                        }
+                        else if (storage['score'] <1200)
+                        {
+                            bullet.style.left = (counter-=3)+"px";
+                        }
+                        else
+                        {
+                            bullet.style.left = (counter-=4)+"px";
+                        }
                     }
                     else if (counter <= (enemy.offsetLeft+enemy.offsetWidth) && bullet.offsetTop > enemy.offsetTop && bullet.offsetTop < (enemy.offsetTop+enemy.offsetHeight) && bullet.offsetLeft >= enemy.offsetLeft)
                     {
