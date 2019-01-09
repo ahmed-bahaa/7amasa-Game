@@ -224,16 +224,79 @@ function right( ){
                 if(storage['score']>(targScore*0.8)) //if player meets target score by 80%
                 {   console.log("target score * 0.8: "+(targScore*0.8));
                     console.log("You win!");
+                    let messageWin = confirm("You want to replay?");
+                    if(messageWin)
+                    {
+                        //redirect to same lvl again
+                        if(storage['score'] > storage['highestScore']){
+                            storage['highestScore']= storage['score'];
+                            storage['level']=2;//on winning set the opened lvl to lv2
+                            storage['lives']=5;
+                            storage['score']=0;
+                            localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            }
+                        location.reload();
+                    }
+                    else 
+                    {
+                        messageWin = confirm("Play next level!"); 
+                        if(messageWin)
+                        {
+                            //redirect to lvl+1
+                            if(storage['score'] > storage['highestScore']){
+                                storage['highestScore']= storage['score'];
+                                storage['level']=2; //on winning set the opened lvl to lv2
+                                storage['lives']=5;
+                                storage['score']=0;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                }
+                            window.location.href="level_2.html";
+                        }
+                        else
+                        {
+                            //redirect to map
+                            if(storage['score'] > storage['highestScore']){
+                                storage['highestScore']= storage['score'];
+                                storage['level']=2; //on winning set the opened lvl to lv2
+                                storage['lives']=5;
+                                storage['score']=0;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                }
+                            window.location.href="map.html";
+                        }
+                    }
                 }
                 else //if score is less
                 {
                     console.log("You lose! Your score was "+storage['score']);
+
+                    let messageWin = confirm("You want to retry?");
+                    if(messageWin)
+                    {
+                        //redirect to same lvl again
+                        if(storage['score'] > storage['highestScore']){
+                            storage['highestScore']= storage['score'];
+                            storage['level']=1;
+                            storage['lives']=5;
+                            storage['score']=0;
+                            localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            }
+                        location.reload();
+                    }
+                    else 
+                    {
+                            //redirect to lmain menu
+                            window.location.href="index.html";
+    
+                    }
                 }
 
             }
+
+       }
     }
 
-}
+
 
 
 function left( ){
@@ -387,6 +450,7 @@ function shoot() {
         }
     }    
     else{
+
         for( var i=0 ; i<num_enemies ; i++){
 
             var enemy = enemy_arr;
@@ -630,6 +694,7 @@ function coll() {
 
                 if(storage['lives'] > 0){
                     storage['lives'] -=1;
+                    storage['score']=0;
                     livesField.textContent= "no.lives:x"+storage['lives'];
                     localStorage.setItem('gameStorage', JSON.stringify(storage));
 
@@ -683,7 +748,7 @@ let levelNumber = storage['level'];
 let coinsNumber = storage['score'];
 let livesNumber = storage['lives'];
 
-levelField.textContent= "LVL.:"+levelNumber;
+levelField.textContent= "LVL.:1";
 coinsField.textContent= "Coins:"+coinsNumber;
 livesField.textContent= "no.lives:x"+livesNumber;
 //============================================================ EON :v /
