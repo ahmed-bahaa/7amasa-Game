@@ -8,13 +8,17 @@ let levels = storage['level'];
 
 let charId = storage['characterId'];
 
-document.getElementById('livesCount').textContent= livesCount;
+let highScore = storage['highestScore'];
 
-document.getElementById('score').textContent= score;
+document.getElementById('livesCount').textContent= livesCount;
+//document.getElementById('score').textContent= score;
+document.getElementById('score').textContent= highScore;
 
 document.getElementById('level').textContent= levels;
 
 document.getElementById('character').textContent= charId;
+
+
 
 
 badge1 = document.getElementById("badge1");
