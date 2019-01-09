@@ -1,36 +1,81 @@
 body{
 
     background-image: url("../images/index1.png");
-    background-size: cover;
+    background-size: 100vw 100vh;
 }
 .char1{
     
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 12%;
     width:24%;
+    animation: pulse 2s linear infinite;
+
 }
+
+
+@-webkit-keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+  }
+  
+
+
 
 .char2{
     
     position: absolute;
-    top: 12%;
-    left: 29%;
+    top: 18%;
+    left: 30%;
     width:30%;
+    animation: pulse 2s linear infinite;
+
 }
-.ship{
-    position: absolute;
-    top: 5%;
-    left: 15%;
-    width: 38%;
-}
+
+
 .btns
 {
     position: absolute;
-    top: 20%;
+    top: 40%;
     left: 60%;
     width: 40%;
     height: 50%;
+    /* animation: pulse 2s linear infinite; */
+
 
 }
 .play , .opt , .profile , .map{
