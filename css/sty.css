@@ -127,8 +127,8 @@ body,html{
 
     position: absolute;
     padding: 0px;
-    width: 20%;
-    height: 25%;
+    width: 15%;
+    height: 20%;
     bottom: 2%;
     z-index: 1;
     animation: pulse 3s linear infinite;
