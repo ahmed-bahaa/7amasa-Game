@@ -54,6 +54,10 @@ let scoreFld  = document.getElementsByClassName("scoreFld")[0];
 let healthFld  = document.getElementsByClassName("healthFld")[0];
 let noLivesFld  = document.getElementsByClassName("noLivesFld")[0];
 
+storage['score']=0;
+scoreFld.textContent=['score'];
+
+
 let lvlEnd = document.getElementsByClassName("gameEnd")[0];
 
 let lvlFrame=8;
@@ -237,8 +241,18 @@ function right( ){
                             storage['level']=4;//on winning set the opened lvl to lv2
                             storage['lives']=5;
                             storage['score']=0;
+                            coinsNumber=0;
+                            coinsField.textContent= "Coins:"+coinsNumber;
                             localStorage.setItem('gameStorage', JSON.stringify(storage));
                             }
+                            else {
+                                storage['level']=4; //on winning set the opened lvl to lv4
+                                storage['lives']=5;
+                                storage['score']=0;
+                                coinsNumber=0;
+                                coinsField.textContent= "Coins:"+coinsNumber;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                }
                         location.reload();
                     }
                     else 
@@ -250,8 +264,18 @@ function right( ){
                                 storage['level']=4; //on winning set the opened lvl to lv4
                                 storage['lives']=5;
                                 storage['score']=0;
+                                coinsNumber=0;
+                                coinsField.textContent= "Coins:"+coinsNumber;
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
                                 }
+                                else {
+                                    storage['level']=4; //on winning set the opened lvl to lv4
+                                    storage['lives']=5;
+                                    storage['score']=0;
+                                    coinsNumber=0;
+                                    coinsField.textContent= "Coins:"+coinsNumber;
+                                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                    }
                             window.location.href="map.html";
                        
                     }
@@ -269,8 +293,18 @@ function right( ){
                             storage['level']=3;
                             storage['lives']=5;
                             storage['score']=0;
+                            coinsNumber=0;
+                            coinsField.textContent= "Coins:"+coinsNumber;
                             localStorage.setItem('gameStorage', JSON.stringify(storage));
                             }
+                            else {
+                                storage['level']=3;
+                                storage['lives']=5;
+                                storage['score']=0;
+                                coinsNumber=0;
+                                coinsField.textContent= "Coins:"+coinsNumber;
+                                localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                }
                         location.reload();
                     }
                     else 
@@ -281,8 +315,18 @@ function right( ){
                                 storage['level']=3;
                                 storage['lives']=5;
                                 storage['score']=0;
+                                coinsNumber=0;
+                                coinsField.textContent= "Coins:"+coinsNumber;
                                 localStorage.setItem('gameStorage', JSON.stringify(storage));
                                 }
+                                else {
+                                    storage['level']=3;
+                                    storage['lives']=5;
+                                    storage['score']=0;
+                                    coinsNumber=0;
+                                    coinsField.textContent= "Coins:"+coinsNumber;
+                                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                    }
                             window.location.href="index.html";
     
                     }
@@ -598,12 +642,22 @@ function shoot_enemy(k) {
                                     storage['level']=1;
                                     storage['lives']=5;
                                     storage['score']=0;
+                                    coinsNumber=0;
+                                    coinsField.textContent= "Coins:"+coinsNumber;
                                     localStorage.setItem('gameStorage', JSON.stringify(storage));
                                     //redirect to home from here or whatever
                                     // action when user die without enough lives 
                                     
                                     
                                 }
+                                else {
+                                    storage['level']=1;
+                                    storage['lives']=5;
+                                    storage['score']=0;
+                                    coinsNumber=0;
+                                    coinsField.textContent= "Coins:"+coinsNumber;
+                                    localStorage.setItem('gameStorage', JSON.stringify(storage));
+                                    }
                                 alert("you are such a loser :) back to main menu");
                                 window.location.href="index.html"
                             }
@@ -719,8 +773,18 @@ function coll() {
                         storage['level']=1;
                         storage['lives']=5;
                         storage['score']=0;
+                        coinsNumber=0;
+                        coinsField.textContent= "Coins:"+coinsNumber;
                         localStorage.setItem('gameStorage', JSON.stringify(storage));
                         }
+                        else {
+                            storage['level']=1;
+                            storage['lives']=5;
+                            storage['score']=0;
+                            coinsNumber=0;
+                            coinsField.textContent= "Coins:"+coinsNumber;
+                            localStorage.setItem('gameStorage', JSON.stringify(storage));
+                            }
                     window.location.href="index.html"
                 }
 
