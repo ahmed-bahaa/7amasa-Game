@@ -1,4 +1,6 @@
 //character positions
+let storage = JSON.parse(localStorage.getItem('gameStorage'));
+
 let pos1=0;
 let pos2=0;
 let bull1=0;
@@ -9,6 +11,7 @@ let health=100;
 let score=0;
 let bullet_damage=50;
 let bullet_damage_ene=10;
+let character_run = [];
 //character attributes
 jump_power=40;
 let coincollector=0;
@@ -17,11 +20,22 @@ let character = document.getElementById("man");
 let main_win = document.getElementById("main_window");
 
 // images
-let character_run = ["images/im.png","images/im2.png"];
+
+let char1_chars = ["images/char1/1.png","images/char1/2.png","images/char1/3.png","images/char1/4.png","images/char1/5.png","images/char1/6.png"];
+let char2_chars = ["images/char2/1.png","images/char2/2.png","images/char2/3.png","images/char2/4.png","images/char2/5.png"]
+if( storage['characterId'] === "char1" )
+{
+    character_run =char1_chars;
+}
+else {
+    character_run =char2_chars;
+}
+
 let background_images = ["url(images/back.jpg)","url(images/back2.jpg)"];
 let i=0;    //character positions
 let j=0;    //background swapper 
 
+character.src = character_run[0];
 document.addEventListener( 'keydown', move );
 
 
@@ -42,7 +56,6 @@ let enemy_interval=[];
 
 
 //==========================coins================================== Nada /
-let storage = JSON.parse(localStorage.getItem('gameStorage'));
 
 function generateCoins(start, noOfCoins){
     let space=start;
@@ -272,7 +285,7 @@ function shoot() {
     bullet.className = "bullet";
     bullet.src = "images/Shuriken.gif"
     main_win.appendChild(bullet);
-    bullet.style.top = (character.offsetTop+ 80)+"px";
+    bullet.style.top = (character.offsetTop+ 60)+"px";
     bullet.style.left = (character.offsetLeft+95) + "px";
 
     function move_bullet(){
