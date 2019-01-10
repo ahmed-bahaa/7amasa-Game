@@ -28,7 +28,7 @@ let main_win = document.getElementById("main_window");
 let character_die = ["images/char1/ninja-6.png","images/char1/ninja-7.png","images/char1/ninja-8.png","images/char1/ninja-9.png",
 "images/char1/ninja-10.png","images/char1/ninja-11.png","images/char1/ninja-12.png"];
 */
-let background_images = ["url(images/levels_images/back2.jpg)"];
+let background_images = ["url(images/levels_images/back1.jpg)"];
 
 let char1_chars = ["images/char1/1.png","images/char1/2.png","images/char1/3.png","images/char1/4.png","images/char1/5.png","images/char1/6.png"];
 let char2_chars = ["images/char2/1.png","images/char2/2.png","images/char2/3.png","images/char2/4.png","images/char2/5.png"]
